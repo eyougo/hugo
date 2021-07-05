@@ -59,7 +59,7 @@ public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
 ### 4、例子
 在我们的示例中，我们有一个ItemService组件，用于从数据库中检索项目信息。实际上，假设这是一个潜在的代价高昂的操作，是一个很好的使用缓存场景。
 
-首先，让我们使用嵌入式Redis服务器为该组件创建集成测试：
+首先，让我们使用[嵌入式Redis服务器](/post/spring-embedded-redis)为该组件创建集成测试：
 ```java
 @Import({ CacheConfig.class, ItemService.class})
 @ExtendWith(SpringExtension.class)
@@ -98,7 +98,7 @@ class ItemServiceCachingIntegrationTest {
 ```
 在这里，我们为缓存行为创建一个测试切面并调用getItemForId两次。第一次调用应该从存储库中获取结果，但第二次调用应该从缓存中返回结果而不调用存储库。
 
-最后，让我们使用Spring的`@Cacheable`注释启用缓存行为：
+最后，让我们使用Spring的`@Cacheable`注解启用缓存行为：
 ```java
 @Cacheable(value = "itemCache")
 public Item getItemForId(String id) {
