@@ -1,0 +1,3 @@
+[submodule "themes/fuji"]
+	path = themes/fuji
+	url = git@github.com:eyougo/hugo-theme-fuji.git
