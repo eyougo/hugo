@@ -1,16 +1,16 @@
-baseURL = "https://example.com"
-title = "Hugo Theme Fuji"
+baseURL = "https://pinmost.com"
+title = "码农熊猫"
 
 theme = "fuji"
 hasCJKLanguage = true
 enableEmoji = true
 enableRobotsTXT = true
-disableKinds = ["taxonomy"]
-ignoreErrors = ["error-disable-taxonomy"]
+disableKinds = []
+ignoreErrors = []
 
 ## Change this two to switch between different language
-languageCode = "en"  # For RSS, view https://www.rssboard.org/rss-language-codes
-defaultContentLanguage = "en"  # For HTML page, now support: en, zh-hans, zh-hant, ja, nl, pl, it
+languageCode = "zh-cn"  # For RSS, view https://www.rssboard.org/rss-language-codes
+defaultContentLanguage = "zh-hans"  # For HTML page, now support: en, zh-hans, zh-hant, ja, nl, pl, it
 
 summaryLength = 100 # Custom summary length, add <!--more--> in post file to custom split point
 paginate = 10
@@ -31,12 +31,12 @@ paginate = 10
   post = "/:section/:filename/" # Custom post links, e.g. "/:year/:month/:title/"
 
 [params]
-  author = "DSRKafuU" # You can also set author in post front matter individually
-  subTitle = "A minimal Hugo theme."
+  author = "码农熊猫" # You can also set author in post front matter individually
+  subTitle = "6年业余，13年专业。空谈误国，code兴邦。"
   defaultTheme = "auto" # default theme when first visit (auto|dark|light)
 
   # Source URL of the website, will appear in the footer
-  sourceURL = "https://github.com/dsrkafuu/hugo-theme-fuji"
+  sourceURL = "https://github.com/eyougo/hugo"
 
   # Use CloudFlare Workers to accelerate the Google Analytics
   # If you are using this please comment the googleAnalytics above
@@ -56,11 +56,11 @@ paginate = 10
   showLicenseInFooter = false
 
   # License at the end of each post
-  showLicense = true
+  showLicense = false
   showToc = true
 
   # Copyright
-  copyrightStartYear = "2020"
+  copyrightStartYear = "2021"
 
   # Open Graph & Twitter Card variables
   # You can also set description and images in post front matter individually
@@ -116,19 +116,19 @@ paginate = 10
 
 [menu]
   [[menu.nav]]
-    name = "Home"
+    name = "首页"
     url = "/"
     weight = 1
   [[menu.nav]]
-    name = "Archives"
+    name = "归档"
     url = "/archives/"
     weight = 2
   [[menu.nav]]
-    name = "About"
+    name = "关于"
     url = "/about/"
     weight = 3
   [[menu.nav]]
-    name = "Search"
+    name = "搜索"
     url = "/search/"
     weight = 4
   [[menu.nav]]
@@ -138,13 +138,5 @@ paginate = 10
 
   [[menu.link]]
     name = "GitHub"
-    url = "https://github.com/dsrkafuu"
+    url = "https://github.com/eyougo"
     weight = 1
-  [[menu.link]]
-    name = "Twitter"
-    url = "https://twitter.com/dsrkafuu"
-    weight = 2
-  [[menu.link]]
-    name = "bilibili"
-    url = "https://space.bilibili.com/19767474"
-    weight = 3
