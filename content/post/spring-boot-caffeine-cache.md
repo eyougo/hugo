@@ -7,7 +7,7 @@ tags:
 ---
 
 ### 1、概述
-Caffeine缓存是Java的高性能缓存库。在这个简短的教程中，我们将看到如何在Spring Boot中使用它。
+[Caffeine缓存](/post/java-caching-caffeine)是Java的高性能缓存库。在这个简短的教程中，我们将看到如何在Spring Boot中使用它。
 
 ### 2、依赖
 要开始使用Caffeine和Spring Boot，我们首先添加`spring-boot-starter-cache`和`caffeine`依赖项：
