@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>码农熊猫</title>
-    <link>https://pinmost.com/</link>
-    <description>Recent content on 码农熊猫</description>
+    <title>Posts on 码农熊猫</title>
+    <link>https://pinmost.com/post/</link>
+    <description>Recent content in Posts on 码农熊猫</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 06 Jul 2021 10:18:22 +0800</lastBuildDate><atom:link href="https://pinmost.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Jul 2021 10:18:22 +0800</lastBuildDate><atom:link href="https://pinmost.com/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Caffeine缓存简单介绍</title>
       <link>https://pinmost.com/post/java-caching-caffeine/</link>

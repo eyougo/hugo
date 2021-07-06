@@ -2,8 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://pinmost.com/tags/caching/</loc>
+    <lastmod>2021-07-06T10:18:22+08:00</lastmod>
+  </url><url>
+    <loc>https://pinmost.com/post/java-caching-caffeine/</loc>
+    <lastmod>2021-07-06T10:18:22+08:00</lastmod>
+  </url><url>
+    <loc>https://pinmost.com/tags/java/</loc>
+    <lastmod>2021-07-06T10:18:22+08:00</lastmod>
+  </url><url>
+    <loc>https://pinmost.com/post/</loc>
+    <lastmod>2021-07-06T10:18:22+08:00</lastmod>
+  </url><url>
+    <loc>https://pinmost.com/tags/spring-boot/</loc>
+    <lastmod>2021-07-06T10:18:22+08:00</lastmod>
+  </url><url>
     <loc>https://pinmost.com/tags/</loc>
+    <lastmod>2021-07-06T10:18:22+08:00</lastmod>
+  </url><url>
+    <loc>https://pinmost.com/post/spring-boot-caffeine-cache/</loc>
+    <lastmod>2021-07-06T10:18:22+08:00</lastmod>
   </url><url>
     <loc>https://pinmost.com/</loc>
+    <lastmod>2021-07-06T10:18:22+08:00</lastmod>
+  </url><url>
+    <loc>https://pinmost.com/tags/redis/</loc>
+    <lastmod>2021-07-05T22:57:22+08:00</lastmod>
+  </url><url>
+    <loc>https://pinmost.com/tags/testing/</loc>
+    <lastmod>2021-07-05T22:57:22+08:00</lastmod>
+  </url><url>
+    <loc>https://pinmost.com/post/spring-embedded-redis/</loc>
+    <lastmod>2021-07-05T22:57:22+08:00</lastmod>
+  </url><url>
+    <loc>https://pinmost.com/tags/spring-data/</loc>
+    <lastmod>2021-07-05T19:26:22+08:00</lastmod>
+  </url><url>
+    <loc>https://pinmost.com/post/spring-boot-redis-cache/</loc>
+    <lastmod>2021-07-05T19:26:22+08:00</lastmod>
   </url>
 </urlset>

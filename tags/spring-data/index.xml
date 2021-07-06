@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring Data on 码农熊猫</title>
+    <link>https://pinmost.com/tags/spring-data/</link>
+    <description>Recent content in Spring Data on 码农熊猫</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 05 Jul 2021 19:26:22 +0800</lastBuildDate><atom:link href="https://pinmost.com/tags/spring-data/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何使用Redis作为Spring Boot缓存</title>
+      <link>https://pinmost.com/post/spring-boot-redis-cache/</link>
+      <pubDate>Mon, 05 Jul 2021 19:26:22 +0800</pubDate>
+      
+      <guid>https://pinmost.com/post/spring-boot-redis-cache/</guid>
+      <description>1、简介 在这个简短的教程中，我们将看看如何将Redis配置为Spring Boot缓存的数据存储。 2、依赖 首先，让我们在pom.xml中添加spring-boot-starter-cache和sprin</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>码农熊猫</title>
-    <link>https://pinmost.com/</link>
-    <description>Recent content on 码农熊猫</description>
+    <title>Caching on 码农熊猫</title>
+    <link>https://pinmost.com/tags/caching/</link>
+    <description>Recent content in Caching on 码农熊猫</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 06 Jul 2021 10:18:22 +0800</lastBuildDate><atom:link href="https://pinmost.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Jul 2021 10:18:22 +0800</lastBuildDate><atom:link href="https://pinmost.com/tags/caching/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Caffeine缓存简单介绍</title>
       <link>https://pinmost.com/post/java-caching-caffeine/</link>
@@ -27,15 +27,6 @@
       
       <guid>https://pinmost.com/post/spring-boot-caffeine-cache/</guid>
       <description>1、概述 Caffeine缓存是Java的高性能缓存库。在这个简短的教程中，我们将看到如何在Spring Boot中使用它。 2、依赖 要开始使用Caffeine和Spring Boot，我们首先添加sprin</description>
-    </item>
-    
-    <item>
-      <title>嵌入式Redis服务器在Spring Boot测试中的使用</title>
-      <link>https://pinmost.com/post/spring-embedded-redis/</link>
-      <pubDate>Mon, 05 Jul 2021 22:57:22 +0800</pubDate>
-      
-      <guid>https://pinmost.com/post/spring-embedded-redis/</guid>
-      <description>1、概述 Spring Data Redis提供了一种与Redis实例集成的简单方法。 但是，在某些情况下，使用嵌入式服务器比使用真实服务器创建开发和测试环境更方便。 因此，我们将学习如何设置和使用嵌入式Redis服务器。 2、</description>
     </item>
     
     <item>

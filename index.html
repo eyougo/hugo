@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.84.4" />
+<meta name="generator" content="Hugo 0.85.0" />
 
 
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/dsrkafuu/dsr-cdn-main@1/images/favicons/dsrca.ico" />
@@ -32,7 +32,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://pinmost.com/" /><meta property="og:image" content="https://pinmost.com/img/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://pinmost.com/img/og.png" />
+<meta name="twitter:image" content="https://pinmost.com/img/og.png" /><meta property="og:updated_time" content="2021-07-06T10:18:22+08:00" />
 
 
 <style>
@@ -98,6 +98,78 @@
 
 
 
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://pinmost.com/post/java-caching-caffeine/">Caffeine缓存简单介绍</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-07-06</span>
+
+<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2380 字</span>
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;<a href="/tags/caching">Caching</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        <h3 id="1简介">1、简介</h3>
+<p>在本文中，我们将了解Caffeine，一个用于Java的高性能缓存库。</p>
+<p>缓存和Map之间的一个根本区别是缓存会清理存储的项目。</p>
+<p>一个清理策略会决定在某个给定时间哪些对象应该被删除，这个策略直接影响缓存的命中率——缓存库的一个关键特性。</p>
+<p>Caffeine使用<code>Window TinyLfu</code>清理策略，它提供了接近最佳的命中率。</p>
+    </div>
+</div>
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://pinmost.com/post/spring-boot-caffeine-cache/">在Spring Boot中使用Caffeine缓存</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-07-06</span>
+
+<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;895 字</span>
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/spring-boot">Spring Boot</a>&nbsp;<a href="/tags/caching">Caching</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        1、概述 Caffeine缓存是Java的高性能缓存库。在这个简短的教程中，我们将看到如何在Spring Boot中使用它。 2、依赖 要开始使用Caffeine和Spring Boot，我们首先添加sprin
+    </div>
+</div>
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://pinmost.com/post/spring-embedded-redis/">嵌入式Redis服务器在Spring Boot测试中的使用</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-07-05</span>
+
+<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1040 字</span>
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/spring-boot">Spring Boot</a>&nbsp;<a href="/tags/testing">Testing</a>&nbsp;<a href="/tags/redis">Redis</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        1、概述 Spring Data Redis提供了一种与Redis实例集成的简单方法。 但是，在某些情况下，使用嵌入式服务器比使用真实服务器创建开发和测试环境更方便。 因此，我们将学习如何设置和使用嵌入式Redis服务器。 2、
+    </div>
+</div>
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://pinmost.com/post/spring-boot-redis-cache/">如何使用Redis作为Spring Boot缓存</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-07-05</span>
+
+<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1073 字</span>
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/spring-data">Spring Data</a>&nbsp;<a href="/tags/caching">Caching</a>&nbsp;<a href="/tags/redis">Redis</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        1、简介 在这个简短的教程中，我们将看看如何将Redis配置为Spring Boot缓存的数据存储。 2、依赖 首先，让我们在pom.xml中添加spring-boot-starter-cache和sprin
+    </div>
+</div>
+
             </div>
             <aside class="col-12 col-md-3 float-left sidebar">
     
@@ -142,6 +214,30 @@
     <div class="sidebar-item sidebar-tags">
         <h3>标签</h3>
         <div>
+            
+            <span>
+                <a href="/tags/caching/">Caching</a>
+            </span>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/redis/">Redis</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-boot/">Spring Boot</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-data/">Spring Data</a>
+            </span>
+            
+            <span>
+                <a href="/tags/testing/">Testing</a>
+            </span>
             
         </div>
     </div>
@@ -206,6 +302,30 @@
     <div class="sidebar-item sidebar-tags">
         <h3>标签</h3>
         <div>
+            
+            <span>
+                <a href="/tags/caching/">Caching</a>
+            </span>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/redis/">Redis</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-boot/">Spring Boot</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-data/">Spring Data</a>
+            </span>
+            
+            <span>
+                <a href="/tags/testing/">Testing</a>
+            </span>
             
         </div>
     </div>
