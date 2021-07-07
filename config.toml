@@ -100,6 +100,8 @@ paginate = 10
   # Let images display in full brightness under dark mode
   # disableDarkImage = true
 
+  weixinSidebar = "扫码关注公众号【码农熊猫】"
+  weixinImage = "/images/weixin/qrcode.jpg"
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
@@ -135,8 +137,8 @@ paginate = 10
     name = "RSS"
     url = "/index.xml"
     weight = 5
-
   [[menu.link]]
     name = "GitHub"
     url = "https://github.com/eyougo"
     weight = 1
+
