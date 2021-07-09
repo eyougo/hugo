@@ -99,9 +99,11 @@ paginate = 10
 
   # Let images display in full brightness under dark mode
   # disableDarkImage = true
+  weixinName = "【码农熊猫】"
+  weixinSidebar = "微信扫码关注公众号"
+  weixinSidebarImage = "/images/weixin/qrcode.jpg"
+  weixinHeaderImage = "/images/weixin/qrcode_search.jpg"
 
-  weixinSidebar = "扫码关注公众号【码农熊猫】"
-  weixinImage = "/images/weixin/qrcode.jpg"
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
