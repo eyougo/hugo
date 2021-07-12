@@ -6,7 +6,16 @@
     <description>Recent content on 码农熊猫</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 06 Jul 2021 10:18:22 +0800</lastBuildDate><atom:link href="https://pinmost.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Jul 2021 18:18:22 +0800</lastBuildDate><atom:link href="https://pinmost.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring缓存指南</title>
+      <link>https://pinmost.com/post/spring-cache-tutorial/</link>
+      <pubDate>Wed, 07 Jul 2021 18:18:22 +0800</pubDate>
+      
+      <guid>https://pinmost.com/post/spring-cache-tutorial/</guid>
+      <description>1、缓存抽象？ 在本教程中，我们将学习如何在Spring中使用缓存抽象，并从总体上改进我们系统的性能。 我们将为一些现实的方法示例启用简单的缓存，还将讨论如何通过智能的缓存管理来实际改进这些调用的性能。 2</description>
+    </item>
+    
     <item>
       <title>Caffeine缓存简单介绍</title>
       <link>https://pinmost.com/post/java-caching-caffeine/</link>

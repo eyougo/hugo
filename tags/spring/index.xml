@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring on 码农熊猫</title>
+    <link>https://pinmost.com/tags/spring/</link>
+    <description>Recent content in Spring on 码农熊猫</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 07 Jul 2021 18:18:22 +0800</lastBuildDate><atom:link href="https://pinmost.com/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring缓存指南</title>
+      <link>https://pinmost.com/post/spring-cache-tutorial/</link>
+      <pubDate>Wed, 07 Jul 2021 18:18:22 +0800</pubDate>
+      
+      <guid>https://pinmost.com/post/spring-cache-tutorial/</guid>
+      <description>1、缓存抽象？ 在本教程中，我们将学习如何在Spring中使用缓存抽象，并从总体上改进我们系统的性能。 我们将为一些现实的方法示例启用简单的缓存，还将讨论如何通过智能的缓存管理来实际改进这些调用的性能。 2</description>
+    </item>
+    
+  </channel>
+</rss>

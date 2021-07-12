@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.85.0" />
+
+
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/dsrkafuu/dsr-cdn-main@1/images/favicons/dsrca.ico" />
+
+
+
+<title>Spring缓存指南 - 码农熊猫</title>
+
+
+<meta name="author" content="码农熊猫" />
+
+
+<meta name="description" content="A minimal Hugo theme with nice theme color." />
+
+
+<meta name="keywords" content="Spring, Caching" />
+
+
+<meta property="og:title" content="Spring缓存指南" />
+<meta name="twitter:title" content="Spring缓存指南" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pinmost.com/post/spring-cache-tutorial/" /><meta property="og:description" content="1、缓存抽象？ 在本教程中，我们将学习如何在Spring中使用缓存抽象，并从总体上改进我们系统的性能。 我们将为一些现实的方法示例启用简单的缓存，还将讨论如何通过智能的缓存管理来实际改进这些调用的性能。 2" />
+<meta name="twitter:description" content="1、缓存抽象？ 在本教程中，我们将学习如何在Spring中使用缓存抽象，并从总体上改进我们系统的性能。 我们将为一些现实的方法示例启用简单的缓存，还将讨论如何通过智能的缓存管理来实际改进这些调用的性能。 2" /><meta property="og:image" content="https://pinmost.com/img/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://pinmost.com/img/og.png" /><meta property="article:published_time" content="2021-07-07T18:18:22+08:00" /><meta property="article:modified_time" content="2021-07-07T18:18:22+08:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://pinmost.com/assets/css/fuji.min.css" />
+
+
+
+
+
+
+<script>
+    window.ga_tid = 'UA-104688192-1';
+    window.ga_api = 'https:\/\/pinmost-google-analytics.eyougo.workers.dev';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+
+</head>
+
+<body
+  data-theme="auto"
+  data-theme-auto='true'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://pinmost.com">码农熊猫</a>
+            
+            <span class="title-sub">6年业余，13年专业。空谈误国，code兴邦。</span>
+            
+            <div class="header-weixin">
+              <img class="lazyload" src="/images/weixin/qrcode_search.jpg" />
+            </div>
+        </div>
+    </div>
+</header>
+
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://pinmost.com/post/spring-cache-tutorial/">Spring缓存指南</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-07-07</span>
+
+<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2559 字</span>
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/spring">Spring</a>&nbsp;<a href="/tags/caching">Caching</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h3 id="1缓存抽象">1、缓存抽象？</h3>
+<p>在本教程中，我们将学习如何<em>在Spring中使用缓存抽象</em>，并从总体上改进我们系统的性能。</p>
+<p>我们将为一些现实的方法示例启用简单的缓存，还将讨论如何通过智能的缓存管理来实际改进这些调用的性能。</p>
+<h3 id="2入门">2、入门</h3>
+<p>Spring提供的核心缓存抽象位于 <a href="https://search.maven.org/search?q=g:org.springframework%20a:spring-context" target="_blank"><code>spring-context</code></a> 模块中。
+所以在使用Maven时，我们的<code>pom.xml</code>应该包含如下依赖：</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+    &lt;version&gt;5.3.3&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>有趣的是，还有另一个名为<a href="https://search.maven.org/search?q=g:org.springframework%20a:spring-context-support" target="_blank"><code>spring-context-support</code></a> 的模块，
+它位于<code>spring-context</code>模块的顶层，并提供了一些<code>CacheManagers</code>，由类似EhCache或Caffeine等提供支持。如果我们想将它们用作我们的缓存存储，那么我们需要改用<code>spring-context-support</code>模块：</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;
+    &lt;version&gt;5.3.3&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>由于<code>spring-context-support</code>模块传递依赖于<code>spring-context</code>模块，因此不需要为<code>spring-context</code>单独声明依赖项。</p>
+<h4 id="21spring-boot">2.1、Spring Boot</h4>
+<p>如果我们使用Spring Boot，那么我们可以利用<a href="https://search.maven.org/search?q=g:org.springframework.boot%20a:spring-boot-starter-cache" target="_blank"><code>spring-boot-starter-cache</code></a> 启动包来轻松添加缓存依赖项：</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-cache&lt;/artifactId&gt;
+    &lt;version&gt;2.4.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>在这个封装下，启动包会引入<code>spring-context-support</code>模块。</p>
+<h3 id="3启用缓存">3、启用缓存</h3>
+<p>为了启用缓存，Spring充分利用了注解，就像启用框架中的任何其他配置级别功能一样。</p>
+<p>我们可以简单地通过在任何配置类中添加@EnableCaching注解来启用缓存功能：</p>
+<pre><code class="language-java">@Configuration
+@EnableCaching
+public class CachingConfig {
+
+    @Bean
+    public CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager(&quot;addresses&quot;);
+    }
+}
+</code></pre>
+<p>当然，我们也可以使用XML配置启用缓存管理：</p>
+<pre><code class="language-xml">&lt;beans&gt;
+    &lt;cache:annotation-driven /&gt;
+
+    &lt;bean id=&quot;cacheManager&quot; class=&quot;org.springframework.cache.support.SimpleCacheManager&quot;&gt;
+        &lt;property name=&quot;caches&quot;&gt;
+            &lt;set&gt;
+                &lt;bean 
+                  class=&quot;org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean&quot; 
+                  name=&quot;addresses&quot;/&gt;
+            &lt;/set&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<p>注意：启用缓存后，对于最基本的设置，我们必须注册一个cacheManager。</p>
+<h4 id="31使用spring-boot">3.1、使用Spring Boot</h4>
+<p>使用Spring Boot时，依赖的starter包与<code>EnableCaching</code>注释一起存在将注册相同的<code>ConcurrentMapCacheManager</code>，所以不需要单独的bean声明。</p>
+<p>此外，我们可以使用一个或多个<code>CacheManagerCustomizer&lt;T&gt;</code>bean来定制<a href="https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/cache/CacheAutoConfiguration.java" target="_blank">自动配置</a>的<code>CacheManager</code>：</p>
+<pre><code class="language-java">@Component
+public class SimpleCacheCustomizer 
+  implements CacheManagerCustomizer&lt;ConcurrentMapCacheManager&gt; {
+
+    @Override
+    public void customize(ConcurrentMapCacheManager cacheManager) {
+        cacheManager.setCacheNames(asList(&quot;users&quot;, &quot;transactions&quot;));
+    }
+}
+</code></pre>
+<p>这个<a href="https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/cache/CacheAutoConfiguration.java" target="_blank"><code>CacheAutoConfiguration</code></a>自动配置会找到这些定制类，并把它们应用到当前的<code>CacheManager</code>，在其完整初始化之前。</p>
+<h3 id="4使用注解缓存">4、使用注解缓存</h3>
+<p>启用缓存后，下一步是将缓存行为绑定到声明了注解的方法。</p>
+<h4 id="41cacheable">4.1、@Cacheable</h4>
+<p>为方法启用缓存行为的最简单方法是使用<code>@Cacheable</code>对其进行标注，并使用要存储结果的缓存名称作为其参数：</p>
+<pre><code class="language-java">@Cacheable(&quot;addresses&quot;)
+public String getAddress(Customer customer) {...}
+</code></pre>
+<p>这个<code>getAddress()</code>被调用时，将在实际调用方法之前首先检查缓存<code>addresses</code>，之后缓存方法的结果。</p>
+<p>虽然在大多数情况下一个缓存就足够了，但Spring框架也支持多个缓存作为参数传递：</p>
+<pre><code class="language-java">@Cacheable({&quot;addresses&quot;, &quot;directory&quot;})
+public String getAddress(Customer customer) {...}
+</code></pre>
+<p>在这种情况下，如果任何缓存包含所需的结果，则返回结果并且不调用实际方法。</p>
+<h4 id="42cacheevict">4.2、@CacheEvict</h4>
+<p>现在，如果让所有方法都<code>@Cacheable</code>会有什么问题？</p>
+<p>问题是缓存大小。不是经常需要读取的值，我们并不需要存入缓存。缓存会增长得非常大，非常快，我们可能会保留大量陈旧或不使用的数据。</p>
+<p>我们可以使用<code>@CacheEvict</code>注解来指示删除一个或多个/所有的值，以便可以再次将新值加载到缓存中：</p>
+<pre><code class="language-java">@CacheEvict(value=&quot;addresses&quot;, allEntries=true)
+public String getAddress(Customer customer) {...}
+</code></pre>
+<p>在这里，我们添加了额外参数<code>allEntries</code>与要清空的缓存一起使用，这将清除<code>addresses</code>缓存中的所有条目并为新数据做好准备。</p>
+<h4 id="43cacheput">4.3、@CachePut</h4>
+<p>虽然<code>@CacheEvict</code>通过删除陈旧和未使用的条目来减少在大型缓存中查找条目的开销，但我们希望避免从缓存中清理太多数据。</p>
+<p>相反，每当我们更改条目时，我们都可以选择更新条目。</p>
+<p>使用<code>@CachePut</code>注解，我们可以在不干扰方法执行的情况下更新缓存的内容。也就是说，该方法将始终执行并缓存结果：</p>
+<pre><code class="language-java">@CachePut(value=&quot;addresses&quot;)
+public String getAddress(Customer customer) {...}
+</code></pre>
+<p><code>@Cacheable</code>和<code>@CachePut</code>之间的区别是<code>@Cacheable</code>将跳过运行的方法，而<code>@CachePut</code>将实际运行方法，然后把它的结果存在缓存中。</p>
+<h4 id="44cache">4.4、@Cache</h4>
+<p>如果我们想使用多个相同类型的注解来标注一个方法的缓存怎么办？让我们看一个不正确的例子：</p>
+<pre><code class="language-java">@CacheEvict(&quot;addresses&quot;)
+@CacheEvict(value=&quot;directory&quot;, key=customer.name)
+public String getAddress(Customer customer) {...}
+</code></pre>
+<p>上面的代码将无法编译，因为Java不允许为给定的方法声明多个相同类型的注解。</p>
+<p>上述问题的解决方法是：</p>
+<pre><code class="language-java">@Caching(evict = { 
+  @CacheEvict(&quot;addresses&quot;), 
+  @CacheEvict(value=&quot;directory&quot;, key=&quot;#customer.name&quot;) })
+public String getAddress(Customer customer) {...}
+</code></pre>
+<p>如上面的代码片段所示，我们可以使用<code>@Caching</code>将多个缓存注解分组，并使用它来实现我们自己自定义的缓存逻辑。</p>
+<h4 id="45cacheconfig">4.5、@CacheConfig</h4>
+<p>使用@CacheConfig注解，我们可以在类级别将一些缓存配置简化到一个地方，这样我们就不必多次声明：</p>
+<pre><code class="language-java">@CacheConfig(cacheNames={&quot;addresses&quot;})
+public class CustomerDataService {
+
+    @Cacheable
+    public String getAddress(Customer customer) {...}
+</code></pre>
+<h3 id="5有条件的缓存">5、有条件的缓存</h3>
+<p>有时，缓存可能无法对一个方法在所有情况下都适用。</p>
+<p>重用我们在<code>@CachePut</code>注解中的示例，这将每次都执行该方法并缓存结果：</p>
+<pre><code class="language-java">@CachePut(value=&quot;addresses&quot;)
+public String getAddress(Customer customer) {...}
+</code></pre>
+<h4 id="51condition参数">5.1、Condition参数</h4>
+<p>如果我们想要更多地控制注解何时被激活，我们可以使用一个condition参数作为参数传递给<code>@CachePut</code>，该参数接收了一个SpEL表达式并基于该表达式的计算来对结果进行缓存：</p>
+<pre><code class="language-java">@CachePut(value=&quot;addresses&quot;, condition=&quot;#customer.name=='Tom'&quot;)
+public String getAddress(Customer customer) {...}
+</code></pre>
+<h4 id="52-unless参数">5.2. Unless参数</h4>
+<p>我们还可以通过unless参数根据方法的输出而不是输入来控制缓存：</p>
+<pre><code class="language-java">@CachePut(value=&quot;addresses&quot;, unless=&quot;#result.length()&lt;64&quot;)
+public String getAddress(Customer customer) {...}
+</code></pre>
+<p>上述注解将缓存addresses，除非它们短于64个字符。</p>
+<p>重要的是要知道Condition和unless参数可以与所有缓存注解结合使用。</p>
+<p>事实证明，这种条件缓存对于管理大型结果非常有效。它也可用于根据输入参数自定义行为，而不是对所有操作强制执行通用行为。</p>
+<h3 id="6基于xml的声明式缓存">6、基于XML的声明式缓存</h3>
+<p>如果我们无法访问应用程序的源代码，或者想要在外部注入缓存行为，我们还可以使用基于XML的声明性缓存。</p>
+<p>这是我们的 XML 配置：</p>
+<pre><code class="language-xml">&lt;!-- the service that you wish to make cacheable --&gt;
+&lt;bean id=&quot;customerDataService&quot; 
+  class=&quot;com.your.app.namespace.service.CustomerDataService&quot;/&gt;
+
+&lt;bean id=&quot;cacheManager&quot; 
+  class=&quot;org.springframework.cache.support.SimpleCacheManager&quot;&gt; 
+    &lt;property name=&quot;caches&quot;&gt; 
+        &lt;set&gt; 
+            &lt;bean 
+              class=&quot;org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean&quot; 
+              name=&quot;directory&quot;/&gt; 
+            &lt;bean 
+              class=&quot;org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean&quot; 
+              name=&quot;addresses&quot;/&gt; 
+        &lt;/set&gt; 
+    &lt;/property&gt; 
+&lt;/bean&gt;
+&lt;!-- define caching behavior --&gt;
+&lt;cache:advice id=&quot;cachingBehavior&quot; cache-manager=&quot;cacheManager&quot;&gt;
+    &lt;cache:caching cache=&quot;addresses&quot;&gt;
+        &lt;cache:cacheable method=&quot;getAddress&quot; key=&quot;#customer.name&quot;/&gt;
+    &lt;/cache:caching&gt;
+&lt;/cache:advice&gt;
+
+&lt;!-- apply the behavior to all the implementations of CustomerDataService interface-&gt;
+&lt;aop:config&gt;
+    &lt;aop:advisor advice-ref=&quot;cachingBehavior&quot;
+      pointcut=&quot;execution(* com.your.app.namespace.service.CustomerDataService.*(..))&quot;/&gt;
+&lt;/aop:config&gt;
+</code></pre>
+<h3 id="7基于java的缓存">7、基于Java的缓存</h3>
+<p>这是等效的Java配置：</p>
+<pre><code class="language-java">@Configuration
+@EnableCaching
+public class CachingConfig {
+
+    @Bean
+    public CacheManager cacheManager() {
+        SimpleCacheManager cacheManager = new SimpleCacheManager();
+        cacheManager.setCaches(Arrays.asList(
+          new ConcurrentMapCache(&quot;directory&quot;), 
+          new ConcurrentMapCache(&quot;addresses&quot;)));
+        return cacheManager;
+    }
+}
+</code></pre>
+<p>这是我们的CustomerDataService：</p>
+<pre><code class="language-java">@Component
+public class CustomerDataService {
+ 
+    @Cacheable(value = &quot;addresses&quot;, key = &quot;#customer.name&quot;)
+    public String getAddress(Customer customer) {
+        return customer.getAddress();
+    }
+}
+</code></pre>
+<ol start="8">
+<li>总结
+在本文中，我们讨论了 Spring 中缓存的基础知识，以及如何利用注解充分利用这种抽象。</li>
+</ol>
+
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-weixin">
+      微信扫码关注公众号
+      <br/>
+      <img class="lazyload" src="/images/weixin/qrcode.jpg" />
+      <br/>
+      <h3> 【码农熊猫】 </h3>
+    </div>
+    
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">首页</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">归档</a>
+            </li>
+            
+            <li>
+                <a href="/about/">关于</a>
+            </li>
+            
+            <li>
+                <a href="/search/">搜索</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/eyougo" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/caching/">Caching</a>
+            </span>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/redis/">Redis</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring/">Spring</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-boot/">Spring Boot</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-data/">Spring Data</a>
+            </span>
+            
+            <span>
+                <a href="/tags/testing/">Testing</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1缓存抽象">1、缓存抽象？</a></li>
+        <li><a href="#2入门">2、入门</a></li>
+        <li><a href="#3启用缓存">3、启用缓存</a></li>
+        <li><a href="#4使用注解缓存">4、使用注解缓存</a></li>
+        <li><a href="#5有条件的缓存">5、有条件的缓存</a></li>
+        <li><a href="#6基于xml的声明式缓存">6、基于XML的声明式缓存</a></li>
+        <li><a href="#7基于java的缓存">7、基于Java的缓存</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-weixin">
+      微信扫码关注公众号
+      <br/>
+      <img class="lazyload" src="/images/weixin/qrcode.jpg" />
+      <br/>
+      <h3> 【码农熊猫】 </h3>
+    </div>
+    
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">首页</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">归档</a>
+            </li>
+            
+            <li>
+                <a href="/about/">关于</a>
+            </li>
+            
+            <li>
+                <a href="/search/">搜索</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/eyougo" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/caching/">Caching</a>
+            </span>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/redis/">Redis</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring/">Spring</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-boot/">Spring Boot</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-data/">Spring Data</a>
+            </span>
+            
+            <span>
+                <a href="/tags/testing/">Testing</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1缓存抽象">1、缓存抽象？</a></li>
+        <li><a href="#2入门">2、入门</a></li>
+        <li><a href="#3启用缓存">3、启用缓存</a></li>
+        <li><a href="#4使用注解缓存">4、使用注解缓存</a></li>
+        <li><a href="#5有条件的缓存">5、有条件的缓存</a></li>
+        <li><a href="#6基于xml的声明式缓存">6、基于XML的声明式缓存</a></li>
+        <li><a href="#7基于java的缓存">7、基于Java的缓存</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2021
+                <a href="https://pinmost.com">码农熊猫</a>
+                 | <a href="https://github.com/eyougo/hugo">Source code</a> 
+                | 基于 <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 构建
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>
