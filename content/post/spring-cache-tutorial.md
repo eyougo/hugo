@@ -11,7 +11,8 @@ tags:
 在本教程中，我们将学习如何*在Spring中使用缓存抽象*，并从总体上改进我们系统的性能。
 
 我们将为一些现实的方法示例启用简单的缓存，还将讨论如何通过智能的缓存管理来实际改进这些调用的性能。
-
+<!--more-->
+ 
 ### 2、入门
 
 Spring提供的核心缓存抽象位于 [`spring-context`](https://search.maven.org/search?q=g:org.springframework%20a:spring-context) 模块中。

@@ -8,9 +8,12 @@ tags:
 ---
 
 ### 1、简介
+
 在这个简短的教程中，我们将看看如何将Redis配置为Spring Boot缓存的数据存储。
+<!--more-->
 
 ### 2、依赖
+
 首先，让我们在pom.xml中添加`spring-boot-starter-cache`和`spring-boot-starter-data-redis`组件：
 ```xml
 <dependency>
@@ -27,6 +30,7 @@ tags:
 这些添加了缓存支持并引入了所有必需的依赖项。
 
 ### 3、配置
+
 通过添加上述依赖项和`@EnableCaching`注解，Spring Boot 将使用默认缓存配置自动配置一个`RedisCacheManager`。但是，我们可以在缓存管理器初始化之前以几种有用的方式修改此配置。
 
 首先，让我们创建一个RedisCacheConfiguration bean：
@@ -57,6 +61,7 @@ public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
 值得一提的是，Redis实例的默认连接详细信息是localhost:6379。Redis配置可用于进一步调整更底层的连接细节以及主机和端口。
 
 ### 4、例子
+
 在我们的示例中，我们有一个ItemService组件，用于从数据库中检索项目信息。实际上，假设这是一个潜在的代价高昂的操作，是一个很好的使用缓存场景。
 
 首先，让我们使用[嵌入式Redis服务器](/post/spring-embedded-redis)为该组件创建集成测试：
@@ -109,4 +114,5 @@ public Item getItemForId(String id) {
 这就应用了缓存逻辑，同时依赖于我们之前配置的Redis缓存的基础架构。有关控制Spring缓存对象的属性和行为（包括数据更新和清除）的更多详细信息，可以参见Spring缓存指南文章。
 
 ### 5、结论
+
 在本文章中，我们已经看到了如何使用Redis进行Spring Boot缓存。

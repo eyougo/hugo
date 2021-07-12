@@ -7,9 +7,12 @@ tags:
 ---
 
 ### 1、概述
-[Caffeine缓存](/post/java-caching-caffeine)是Java的高性能缓存库。在这个简短的教程中，我们将看到如何在Spring Boot中使用它。
 
+[Caffeine缓存](/post/java-caching-caffeine)是Java的高性能缓存库。在这个简短的教程中，我们将看到如何在Spring Boot中使用它。
+<!--more-->
+ 
 ### 2、依赖
+
 要开始使用Caffeine和Spring Boot，我们首先添加`spring-boot-starter-cache`和`caffeine`依赖项：
 ```xml
 <dependencies>
@@ -26,6 +29,7 @@ tags:
 这些导入基本的Spring缓存支持以及Caffeine库。
 
 ### 3、配置
+
 现在我们需要在我们的Spring Boot应用程序中配置缓存。
 
 首先，我们创建一个caffeine的bean，用来控制缓存行为的主要配置，例如过期、缓存大小限制等：
@@ -47,6 +51,7 @@ public CacheManager cacheManager(Caffeine caffeine) {
 最后，我们需要使用@EnableCaching注解在Spring Boot中启用缓存支持，这个注解可以添加到应用程序中的任何@Configuration类。
 
 ### 4、例子
+
 启用缓存并配置为使用Caffeine后，让我们看几个示例，说明如何在 Spring Boot 应用程序中使用缓存。
 
 在 Spring Boot 中使用缓存的主要方法是使用@Cacheable注解。此注解适用于 Spring bean（甚至整个类）的任何方法，它指示注册的缓存管理器将方法调用的结果存储在缓存中。
@@ -94,5 +99,6 @@ public class AddressService {
 ```
 
 ### 5、结论
+
 在本教程中，我们已经了解了如何配置Spring Boot以使用Caffeine缓存，以及如何在我们的应用程序中使用缓存的一些示例。
 
