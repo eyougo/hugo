@@ -13,7 +13,10 @@
       <pubDate>Mon, 05 Jul 2021 22:57:22 +0800</pubDate>
       
       <guid>https://pinmost.com/post/spring-embedded-redis/</guid>
-      <description>1、概述 Spring Data Redis提供了一种与Redis实例集成的简单方法。 但是，在某些情况下，使用嵌入式服务器比使用真实服务器创建开发和测试环境更方便。 因此，我们将学习如何设置和使用嵌入式Redis服务器。 2、</description>
+      <description>&lt;h3 id=&#34;1概述&#34;&gt;1、概述&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;Spring Data Redis&lt;/code&gt;提供了一种与Redis实例集成的简单方法。&lt;/p&gt;
+&lt;p&gt;但是，在某些情况下，使用嵌入式服务器比使用真实服务器创建开发和测试环境更方便。&lt;/p&gt;
+&lt;p&gt;因此，我们将学习如何设置和使用嵌入式Redis服务器。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -22,7 +25,8 @@
       <pubDate>Mon, 05 Jul 2021 19:26:22 +0800</pubDate>
       
       <guid>https://pinmost.com/post/spring-boot-redis-cache/</guid>
-      <description>1、简介 在这个简短的教程中，我们将看看如何将Redis配置为Spring Boot缓存的数据存储。 2、依赖 首先，让我们在pom.xml中添加spring-boot-starter-cache和sprin</description>
+      <description>&lt;h3 id=&#34;1简介&#34;&gt;1、简介&lt;/h3&gt;
+&lt;p&gt;在这个简短的教程中，我们将看看如何将Redis配置为Spring Boot缓存的数据存储。&lt;/p&gt;</description>
     </item>
     
   </channel>

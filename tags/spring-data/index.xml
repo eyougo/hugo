@@ -13,7 +13,8 @@
       <pubDate>Mon, 05 Jul 2021 19:26:22 +0800</pubDate>
       
       <guid>https://pinmost.com/post/spring-boot-redis-cache/</guid>
-      <description>1、简介 在这个简短的教程中，我们将看看如何将Redis配置为Spring Boot缓存的数据存储。 2、依赖 首先，让我们在pom.xml中添加spring-boot-starter-cache和sprin</description>
+      <description>&lt;h3 id=&#34;1简介&#34;&gt;1、简介&lt;/h3&gt;
+&lt;p&gt;在这个简短的教程中，我们将看看如何将Redis配置为Spring Boot缓存的数据存储。&lt;/p&gt;</description>
     </item>
     
   </channel>

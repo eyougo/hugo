@@ -13,7 +13,9 @@
       <pubDate>Wed, 07 Jul 2021 18:18:22 +0800</pubDate>
       
       <guid>https://pinmost.com/post/spring-cache-tutorial/</guid>
-      <description>1、缓存抽象？ 在本教程中，我们将学习如何在Spring中使用缓存抽象，并从总体上改进我们系统的性能。 我们将为一些现实的方法示例启用简单的缓存，还将讨论如何通过智能的缓存管理来实际改进这些调用的性能。 2</description>
+      <description>&lt;h3 id=&#34;1缓存抽象&#34;&gt;1、缓存抽象？&lt;/h3&gt;
+&lt;p&gt;在本教程中，我们将学习如何&lt;em&gt;在Spring中使用缓存抽象&lt;/em&gt;，并从总体上改进我们系统的性能。&lt;/p&gt;
+&lt;p&gt;我们将为一些现实的方法示例启用简单的缓存，还将讨论如何通过智能的缓存管理来实际改进这些调用的性能。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -35,7 +37,8 @@
       <pubDate>Tue, 06 Jul 2021 10:18:22 +0800</pubDate>
       
       <guid>https://pinmost.com/post/spring-boot-caffeine-cache/</guid>
-      <description>1、概述 Caffeine缓存是Java的高性能缓存库。在这个简短的教程中，我们将看到如何在Spring Boot中使用它。 2、依赖 要开始使用Caffeine和Spring Boot，我们首先添加sprin</description>
+      <description>&lt;h3 id=&#34;1概述&#34;&gt;1、概述&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://pinmost.com/post/java-caching-caffeine&#34;&gt;Caffeine缓存&lt;/a&gt;是Java的高性能缓存库。在这个简短的教程中，我们将看到如何在Spring Boot中使用它。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -44,7 +47,8 @@
       <pubDate>Mon, 05 Jul 2021 19:26:22 +0800</pubDate>
       
       <guid>https://pinmost.com/post/spring-boot-redis-cache/</guid>
-      <description>1、简介 在这个简短的教程中，我们将看看如何将Redis配置为Spring Boot缓存的数据存储。 2、依赖 首先，让我们在pom.xml中添加spring-boot-starter-cache和sprin</description>
+      <description>&lt;h3 id=&#34;1简介&#34;&gt;1、简介&lt;/h3&gt;
+&lt;p&gt;在这个简短的教程中，我们将看看如何将Redis配置为Spring Boot缓存的数据存储。&lt;/p&gt;</description>
     </item>
     
   </channel>

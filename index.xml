@@ -13,7 +13,14 @@
       <pubDate>Mon, 12 Jul 2021 16:26:22 +0800</pubDate>
       
       <guid>https://pinmost.com/about/</guid>
-      <description>吹牛逼版本（但很真实） 服务过世界巨头国有企业 具备国有大型传统制造企业和大型软件企业工作经验 曾在创新工场工作，深厚的互联网创业研发经验 著名共享经济创业公司的服务端总监，丰富的研发管理经验 在世界顶级区块链</description>
+      <description>&lt;h3 id=&#34;吹牛逼版本但很真实&#34;&gt;吹牛逼版本（但很真实）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;服务过世界巨头国有企业&lt;/li&gt;
+&lt;li&gt;具备国有大型传统制造企业和大型软件企业工作经验&lt;/li&gt;
+&lt;li&gt;曾在创新工场工作，深厚的互联网创业研发经验&lt;/li&gt;
+&lt;li&gt;著名共享经济创业公司的服务端总监，丰富的研发管理经验&lt;/li&gt;
+&lt;li&gt;在世界顶级区块链公司任职技术专家和架构师&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -22,7 +29,9 @@
       <pubDate>Wed, 07 Jul 2021 18:18:22 +0800</pubDate>
       
       <guid>https://pinmost.com/post/spring-cache-tutorial/</guid>
-      <description>1、缓存抽象？ 在本教程中，我们将学习如何在Spring中使用缓存抽象，并从总体上改进我们系统的性能。 我们将为一些现实的方法示例启用简单的缓存，还将讨论如何通过智能的缓存管理来实际改进这些调用的性能。 2</description>
+      <description>&lt;h3 id=&#34;1缓存抽象&#34;&gt;1、缓存抽象？&lt;/h3&gt;
+&lt;p&gt;在本教程中，我们将学习如何&lt;em&gt;在Spring中使用缓存抽象&lt;/em&gt;，并从总体上改进我们系统的性能。&lt;/p&gt;
+&lt;p&gt;我们将为一些现实的方法示例启用简单的缓存，还将讨论如何通过智能的缓存管理来实际改进这些调用的性能。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -44,7 +53,8 @@
       <pubDate>Tue, 06 Jul 2021 10:18:22 +0800</pubDate>
       
       <guid>https://pinmost.com/post/spring-boot-caffeine-cache/</guid>
-      <description>1、概述 Caffeine缓存是Java的高性能缓存库。在这个简短的教程中，我们将看到如何在Spring Boot中使用它。 2、依赖 要开始使用Caffeine和Spring Boot，我们首先添加sprin</description>
+      <description>&lt;h3 id=&#34;1概述&#34;&gt;1、概述&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://pinmost.com/post/java-caching-caffeine&#34;&gt;Caffeine缓存&lt;/a&gt;是Java的高性能缓存库。在这个简短的教程中，我们将看到如何在Spring Boot中使用它。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -53,7 +63,10 @@
       <pubDate>Mon, 05 Jul 2021 22:57:22 +0800</pubDate>
       
       <guid>https://pinmost.com/post/spring-embedded-redis/</guid>
-      <description>1、概述 Spring Data Redis提供了一种与Redis实例集成的简单方法。 但是，在某些情况下，使用嵌入式服务器比使用真实服务器创建开发和测试环境更方便。 因此，我们将学习如何设置和使用嵌入式Redis服务器。 2、</description>
+      <description>&lt;h3 id=&#34;1概述&#34;&gt;1、概述&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;Spring Data Redis&lt;/code&gt;提供了一种与Redis实例集成的简单方法。&lt;/p&gt;
+&lt;p&gt;但是，在某些情况下，使用嵌入式服务器比使用真实服务器创建开发和测试环境更方便。&lt;/p&gt;
+&lt;p&gt;因此，我们将学习如何设置和使用嵌入式Redis服务器。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -62,7 +75,8 @@
       <pubDate>Mon, 05 Jul 2021 19:26:22 +0800</pubDate>
       
       <guid>https://pinmost.com/post/spring-boot-redis-cache/</guid>
-      <description>1、简介 在这个简短的教程中，我们将看看如何将Redis配置为Spring Boot缓存的数据存储。 2、依赖 首先，让我们在pom.xml中添加spring-boot-starter-cache和sprin</description>
+      <description>&lt;h3 id=&#34;1简介&#34;&gt;1、简介&lt;/h3&gt;
+&lt;p&gt;在这个简短的教程中，我们将看看如何将Redis配置为Spring Boot缓存的数据存储。&lt;/p&gt;</description>
     </item>
     
   </channel>
