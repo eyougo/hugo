@@ -8,6 +8,15 @@
     <language>zh-cn</language>
     <lastBuildDate>Wed, 07 Jul 2021 18:18:22 +0800</lastBuildDate><atom:link href="https://pinmost.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>关于我</title>
+      <link>https://pinmost.com/about/</link>
+      <pubDate>Mon, 12 Jul 2021 16:26:22 +0800</pubDate>
+      
+      <guid>https://pinmost.com/about/</guid>
+      <description>吹牛逼版本（但很真实） 服务过世界巨头国有企业 具备国有大型传统制造企业和大型软件企业工作经验 曾在创新工场工作，深厚的互联网创业研发经验 著名共享经济创业公司的服务端总监，丰富的研发管理经验 在世界顶级区块链</description>
+    </item>
+    
+    <item>
       <title>Spring缓存指南</title>
       <link>https://pinmost.com/post/spring-cache-tutorial/</link>
       <pubDate>Wed, 07 Jul 2021 18:18:22 +0800</pubDate>
