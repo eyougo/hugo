@@ -21,7 +21,7 @@
 <meta name="theme-color" content="#ffffff">
 
 
-<title>Java - 码农熊猫</title>
+<title>如何在Apache HttpClient中设置TLS版本 - 码农熊猫</title>
 
 
 <meta name="author" content="码农熊猫" />
@@ -30,14 +30,16 @@
 <meta name="description" content="6年业余，13年专业。空谈误国，code兴邦。" />
 
 
-<link rel="alternate" type="application/rss+xml" href="https://pinmost.com/tags/java/index.xml" title="码农熊猫" />
+<meta name="keywords" content="HTTP Client-Side, Security" />
 
-<meta property="og:title" content="Java" />
-<meta name="twitter:title" content="Java" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://pinmost.com/tags/java/" /><meta property="og:image" content="https://pinmost.com/img/og.png" />
+
+<meta property="og:title" content="如何在Apache HttpClient中设置TLS版本" />
+<meta name="twitter:title" content="如何在Apache HttpClient中设置TLS版本" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pinmost.com/post/apache-httpclient-tls/" /><meta property="og:description" content="1、简介 Apache HttpClient是一个底层、轻量级的客户端HTTP库，用于与HTTP服务器进行通信。 在本教程中，我们将学习如何在使用HttpClient时配置支持的传输层安全（TLS）版本。 我们将首先概" />
+<meta name="twitter:description" content="1、简介 Apache HttpClient是一个底层、轻量级的客户端HTTP库，用于与HTTP服务器进行通信。 在本教程中，我们将学习如何在使用HttpClient时配置支持的传输层安全（TLS）版本。 我们将首先概" /><meta property="og:image" content="https://pinmost.com/img/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://pinmost.com/img/og.png" /><meta property="og:updated_time" content="2021-07-06T10:18:22+08:00" />
+<meta name="twitter:image" content="https://pinmost.com/img/og.png" /><meta property="article:published_time" content="2021-07-06T10:18:22+08:00" /><meta property="article:modified_time" content="2021-07-06T10:18:22+08:00" />
 
 
 <style>
@@ -110,33 +112,101 @@
             
             <div class="col-12 col-md-9 float-left content">
                 
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://pinmost.com/post/apache-httpclient-tls/">如何在Apache HttpClient中设置TLS版本</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-07-06</span>
 
-<div class="page-info">
-  <span>拥有标签 Java 的文章：</span>
-</div>
+<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1577 字</span>
 
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/http-client-side">HTTP Client-Side</a>&nbsp;<a href="/tags/security">Security</a>&nbsp;</span>
 
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h3 id="1简介">1、简介</h3>
+<p>Apache HttpClient是一个底层、轻量级的客户端HTTP库，用于与HTTP服务器进行通信。
+在本教程中，我们将学习如何在使用HttpClient时配置支持的传输层安全（TLS）版本。
+我们将首先概述TLS版本协商如何在客户端和服务器之间工作。
+之后，我们将看看在<em>使用HttpClient时配置支持的TLS版本的三种不同方式</em>。</p>
+<h3 id="2tls版本协商">2、TLS版本协商</h3>
+<p>TLS是一种互联网协议，可在两方之间提供安全、可信的通信。它封装了像HTTP这样的应用层协议。
+TLS协议自1999年首次发布以来已多次修订。
+因此，客户端和服务器在建立新连接时，首先就他们将使用的TLS版本达成一致非常重要。
+TLS版本在客户端和服务器交换hello消息后达成一致：</p>
+<ol>
+<li>客户端发送支持的 TLS 版本列表。</li>
+<li>服务器选择一个并在响应中包含所选版本。</li>
+<li>客户端和服务器使用所选版本继续连接设置。
+由于存在降级攻击的风险，因此正确配置Web客户端支持的TLS版本非常重要。
+<em>请注意，为了使用最新版本的TLS（TLS 1.3），我们必须使用Java 11或更高版本</em>。</li>
+</ol>
+<h3 id="3固定设置tls版本">3、固定设置TLS版本</h3>
+<h4 id="31sslconnectionsocketfactory">3.1、SSLConnectionSocketFactory</h4>
+<p>让我们通过<code>HttpClients#custom</code>定制构建方法提供的<code>HttpClientBuilder</code>，来定制我们的<code>HTTPClient</code>配置。
+此构建器模式允许我们传入我们自己的<code>SSLConnectionSocketFactory</code>，它将根据一组所需支持的TLS版本进行实例化：</p>
+<pre><code class="language-java">SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+  SSLContexts.createDefault(),
+  new String[] { &quot;TLSv1.2&quot;, &quot;TLSv1.3&quot; },
+  null,
+  SSLConnectionSocketFactory.getDefaultHostnameVerifier());
 
-<div class="post">
-  <h2 class="post-item post-title">
-    <a href="https://pinmost.com/post/java-caching-caffeine/">Caffeine缓存简单介绍</a>
-  </h2>
-  <div class="post-item post-meta">
-    <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-07-06</span>
+CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+</code></pre>
+<p>返回的<code>Httpclient</code>对象现在可以执行HTTP请求了。
+通过在<code>SSLConnectionSocketFactory</code>构造函数中显式设置支持的协议，客户端将仅支持通过TLS 1.2或TLS 1.3的通信。
+请注意，在 Apache HttpClient 4.3 之前的版本中，该类称为<code>SSLSocketFactory</code>。</p>
+<h4 id="32java运行时参数">3.2、Java运行时参数</h4>
+<p>另外，我们可以使用Java的<code>https.protocols</code>系统属性配置支持的TLS版本。
+此方法可以防止必须将值硬编码到应用程序代码中。
+相反，我们将配置<code>HttpClient</code>以在设置连接时使用该系统属性。
+HttpClient API提供了两种方法来实现。第一个是通过<code>HttpClients#createSystem</code>：</p>
+<pre><code class="language-java">CloseableHttpClient httpClient = HttpClients.createSystem();
+</code></pre>
+<p>如果需要更多的客户端配置，我们可以使用builder方法代替：</p>
+<pre><code class="language-java">CloseableHttpClient httpClient = HttpClients.custom().useSystemProperties().build();
+</code></pre>
+<p>这两种方法都告诉<code>HttpClient</code>在连接配置期间使用系统属性。
+这允许我们在应用程序运行时使用命令行参数设置所需的TLS版本。例如：</p>
+<pre><code class="language-shell">$ java -Dhttps.protocols=TLSv1.1,TLSv1.2,TLSv1.3 -jar webClient.jar
+</code></pre>
+<h3 id="4动态设置tls版本">4、动态设置TLS版本</h3>
+<p>还可以根据主机名和端口等连接详细信息设置TLS版本。我们将扩展<code>SSLConnectionSocketFactory</code>并覆盖<code>prepareSocket</code>方法。
+客户端会在启动新连接之前调用<code>prepareSocket</code>方法，这将可以让我们在每个连接的基础上决定使用哪些TLS协议。
+也可以启用对旧TLS版本的支持，但前提是远程主机具有特定的子域：</p>
+<pre><code class="language-java">SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(SSLContexts.createDefault()){
 
-<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2380 字</span>
+    @Override
+    protected void prepareSocket(SSLSocket socket) {
 
-<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;<a href="/tags/caching">Caching</a>&nbsp;</span>
+        String hostname = socket.getInetAddress().getHostName();
+        if (hostname.endsWith(&quot;internal.system.com&quot;)){
+            socket.setEnabledProtocols(new String[] { &quot;TLSv1&quot;, &quot;TLSv1.1&quot;, &quot;TLSv1.2&quot;, &quot;TLSv1.3&quot; });
+        }
+        else {
+            socket.setEnabledProtocols(new String[] {&quot;TLSv1.3&quot;});
+        }
+    }
+};
+CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+</code></pre>
+<p>在上面的示例中，<code>prepareSocket</code>方法首先获取<code>SSLSocket</code>将连接到的远程主机名，然后使用主机名来确定要启用的TLS协议。
+现在，我们的HTTP客户端将对每个请求强制执行TLS 1.3，除了目标主机名的格式为<code>*.internal.system.com</code>。
+由于能够在创建新<code>SSLSocket</code>之前插入自定义逻辑，我们的应用程序现在可以自定义TLS通信的详细信息。</p>
+<h3 id="5结论">5、结论</h3>
+<p>在本文中，我们研究了在使用Apache HttpClient库时配置支持的TLS版本的三种不同方式。
+我们已经了解了如何为所有连接或基于每个连接设置TLS版本。</p>
+<blockquote>
+<p>原文：https://www.baeldung.com/apache-httpclient-tls
+翻译：<a href="https://pinmost.com" target="_blank">码农熊猫</a></p>
+</blockquote>
 
-  </div>
-  <div class="post-item post-summary markdown-body">
-    <h3 id="1简介">1、简介</h3>
-<p>在本文中，我们将了解Caffeine，一个用于Java的高性能缓存库。</p>
-<p>缓存和Map之间的一个根本区别是缓存会清理存储的项目。</p>
-<p>一个清理策略会决定在某个给定时间哪些对象应该被删除，这个策略直接影响缓存的命中率——缓存库的一个关键特性。</p>
-<p>Caffeine使用<code>Window TinyLfu</code>清理策略，它提供了接近最佳的命中率。</p>
-  </div>
-</div>
+    </div>
+</article>
+
 
 
 
@@ -232,9 +302,20 @@
             
         </div>
     </div>
-    
-    
-    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1简介">1、简介</a></li>
+        <li><a href="#2tls版本协商">2、TLS版本协商</a></li>
+        <li><a href="#3固定设置tls版本">3、固定设置TLS版本</a></li>
+        <li><a href="#4动态设置tls版本">4、动态设置TLS版本</a></li>
+        <li><a href="#5结论">5、结论</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
 </aside>
 
         </div>
@@ -340,6 +421,25 @@
             </span>
             
         </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1简介">1、简介</a></li>
+        <li><a href="#2tls版本协商">2、TLS版本协商</a></li>
+        <li><a href="#3固定设置tls版本">3、固定设置TLS版本</a></li>
+        <li><a href="#4动态设置tls版本">4、动态设置TLS版本</a></li>
+        <li><a href="#5结论">5、结论</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
     
     
