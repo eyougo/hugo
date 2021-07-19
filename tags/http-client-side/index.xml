@@ -13,7 +13,11 @@
       <pubDate>Tue, 20 Jul 2021 00:18:22 +0800</pubDate>
       
       <guid>https://pinmost.com/post/apache-httpclient-tls/</guid>
-      <description>1、简介 Apache HttpClient是一个底层、轻量级的客户端HTTP库，用于与HTTP服务器进行通信。 在本教程中，我们将学习如何在使用HttpClient时配置支持的传输层安全（TLS）版本。 我们将首先概</description>
+      <description>&lt;h3 id=&#34;1简介&#34;&gt;1、简介&lt;/h3&gt;
+&lt;p&gt;Apache HttpClient是一个底层、轻量级的客户端HTTP库，用于与HTTP服务器进行通信。
+在本教程中，我们将学习如何在使用HttpClient时配置支持的传输层安全（TLS）版本。
+我们将首先概述TLS版本协商如何在客户端和服务器之间工作。
+之后，我们将看看在&lt;em&gt;使用HttpClient时配置支持的TLS版本的三种不同方式&lt;/em&gt;。&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -36,8 +36,16 @@
 <meta property="og:title" content="如何在Apache HttpClient中设置TLS版本" />
 <meta name="twitter:title" content="如何在Apache HttpClient中设置TLS版本" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://pinmost.com/post/apache-httpclient-tls/" /><meta property="og:description" content="1、简介 Apache HttpClient是一个底层、轻量级的客户端HTTP库，用于与HTTP服务器进行通信。 在本教程中，我们将学习如何在使用HttpClient时配置支持的传输层安全（TLS）版本。 我们将首先概" />
-<meta name="twitter:description" content="1、简介 Apache HttpClient是一个底层、轻量级的客户端HTTP库，用于与HTTP服务器进行通信。 在本教程中，我们将学习如何在使用HttpClient时配置支持的传输层安全（TLS）版本。 我们将首先概" /><meta property="og:image" content="https://pinmost.com/img/og.png" />
+<meta property="og:url" content="https://pinmost.com/post/apache-httpclient-tls/" /><meta property="og:description" content="1、简介
+Apache HttpClient是一个底层、轻量级的客户端HTTP库，用于与HTTP服务器进行通信。
+在本教程中，我们将学习如何在使用HttpClient时配置支持的传输层安全（TLS）版本。
+我们将首先概述TLS版本协商如何在客户端和服务器之间工作。
+之后，我们将看看在使用HttpClient时配置支持的TLS版本的三种不同方式。" />
+<meta name="twitter:description" content="1、简介
+Apache HttpClient是一个底层、轻量级的客户端HTTP库，用于与HTTP服务器进行通信。
+在本教程中，我们将学习如何在使用HttpClient时配置支持的传输层安全（TLS）版本。
+我们将首先概述TLS版本协商如何在客户端和服务器之间工作。
+之后，我们将看看在使用HttpClient时配置支持的TLS版本的三种不同方式。" /><meta property="og:image" content="https://pinmost.com/img/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://pinmost.com/img/og.png" /><meta property="article:published_time" content="2021-07-20T00:18:22+08:00" /><meta property="article:modified_time" content="2021-07-20T00:18:22+08:00" />
 
@@ -203,7 +211,6 @@ CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslsf)
 <p>原文：https://www.baeldung.com/apache-httpclient-tls</p>
 <p>翻译：<a href="https://pinmost.com" target="_blank">码农熊猫</a></p>
 </blockquote>
-
     </div>
 </article>
 
