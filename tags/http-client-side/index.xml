@@ -6,11 +6,11 @@
     <description>Recent content in HTTP Client-Side on 码农熊猫</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 06 Jul 2021 10:18:22 +0800</lastBuildDate><atom:link href="https://pinmost.com/tags/http-client-side/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 Jul 2021 00:18:22 +0800</lastBuildDate><atom:link href="https://pinmost.com/tags/http-client-side/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>如何在Apache HttpClient中设置TLS版本</title>
       <link>https://pinmost.com/post/apache-httpclient-tls/</link>
-      <pubDate>Tue, 06 Jul 2021 10:18:22 +0800</pubDate>
+      <pubDate>Tue, 20 Jul 2021 00:18:22 +0800</pubDate>
       
       <guid>https://pinmost.com/post/apache-httpclient-tls/</guid>
       <description>1、简介 Apache HttpClient是一个底层、轻量级的客户端HTTP库，用于与HTTP服务器进行通信。 在本教程中，我们将学习如何在使用HttpClient时配置支持的传输层安全（TLS）版本。 我们将首先概</description>
