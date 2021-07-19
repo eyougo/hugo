@@ -62,6 +62,9 @@ paginate = 10
   # Copyright
   copyrightStartYear = "2021"
 
+  # ICP
+  icp = "京ICP备20026318号-1"
+
   # Open Graph & Twitter Card variables
   # You can also set description and images in post front matter individually
   description = "6年业余，13年专业。空谈误国，code兴邦。"

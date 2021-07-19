@@ -296,4 +296,5 @@ assertEquals(1, cache.stats().missCount());
 我们还可以创建一个`StatsCounter`的实现作为参数来传入`recordStats`。每次与统计相关的更改，这个实现对象都将被调用。
 
 ### 7、结论
+
 在本文中，我们熟悉了Java的Caffeine缓存库。我们看到了如何配置和存入缓存，以及如何根据需要选择合适的过期或刷新策略。
