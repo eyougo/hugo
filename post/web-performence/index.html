@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.85.0" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+<link rel="manifest" href="/images/favicons/site.webmanifest">
+<link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+
+<title>三种方式分析监测web前端性能 - 码农熊猫</title>
+
+
+<meta name="author" content="码农熊猫" />
+
+
+<meta name="description" content="6年业余，13年专业。空谈误国，code兴邦。" />
+
+
+<meta name="keywords" content="Web, Performance" />
+
+
+<meta property="og:title" content="三种方式分析监测web前端性能" />
+<meta name="twitter:title" content="三种方式分析监测web前端性能" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pinmost.com/post/web-performence/" /><meta property="og:description" content="
+原文地址：https://juejin.cn/post/6981315563104501790
+原作者：这些年你跑哪去了
+
+从Performance、Performance API、LightHouse三个方向来分析前端性能。
+1 Performance
+
+运行时性能表现（runtime performance）指的是当你的页面在浏览器运行时的性能表现，而不是在下载页面的时候的表现。用 Chrome DevToos Performance 功能去分析运行时性能表现。
+" />
+<meta name="twitter:description" content="
+原文地址：https://juejin.cn/post/6981315563104501790
+原作者：这些年你跑哪去了
+
+从Performance、Performance API、LightHouse三个方向来分析前端性能。
+1 Performance
+
+运行时性能表现（runtime performance）指的是当你的页面在浏览器运行时的性能表现，而不是在下载页面的时候的表现。用 Chrome DevToos Performance 功能去分析运行时性能表现。
+" /><meta property="og:image" content="https://pinmost.com/img/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://pinmost.com/img/og.png" /><meta property="article:published_time" content="2021-07-20T14:18:22+08:00" /><meta property="article:modified_time" content="2021-07-20T14:18:22+08:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://pinmost.com/assets/css/fuji.min.css" />
+
+
+
+
+
+
+<script>
+    window.ga_tid = 'UA-104688192-1';
+    window.ga_api = 'https:\/\/pinmost-google-analytics.eyougo.workers.dev';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+
+</head>
+
+<body
+  data-theme="auto"
+  data-theme-auto='true'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://pinmost.com">码农熊猫</a>
+            
+            <span class="title-sub">6年业余，13年专业。空谈误国，code兴邦。</span>
+            
+            <div class="header-weixin">
+              <img class="lazyload" src="/images/weixin/qrcode_search.jpg" />
+            </div>
+        </div>
+    </div>
+</header>
+
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://pinmost.com/post/web-performence/">三种方式分析监测web前端性能</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-07-20</span>
+
+<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1680 字</span>
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/web">Web</a>&nbsp;<a href="/tags/performance">Performance</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        <blockquote>
+<p>原文地址：<a href="https://juejin.cn/post/6981315563104501790">https://juejin.cn/post/6981315563104501790</a></p>
+<p>原作者：<a href="https://juejin.cn/user/2735240658560408" target="_blank">这些年你跑哪去了</a></p>
+</blockquote>
+<p>从Performance、Performance API、LightHouse三个方向来分析前端性能。</p>
+<h3 id="1-performance">1 Performance</h3>
+<blockquote>
+<p>运行时性能表现（runtime performance）指的是当你的页面在浏览器运行时的性能表现，而不是在下载页面的时候的表现。用 Chrome DevToos Performance 功能去分析运行时性能表现。</p>
+</blockquote>
+<h4 id="11-面板初始化简介">1.1 面板初始化简介</h4>
+<p><img class="img-zoomable" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/789a98bef13e4041b545ab316f922584~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<h4 id="12-demo-简介">1.2 demo 简介</h4>
+<p><img class="img-zoomable" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/269a351816cb4c7ba49a96885d90cdca~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<h4 id="13-fps图表---frames-per-seconds">1.3 FPS图表 - Frames Per Seconds</h4>
+<p><img class="img-zoomable" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/477f08b837b6458aad3c554a2078e620~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<blockquote>
+<p>分析每一秒的帧，FPS（frames per second）是用来分析动画的一个主要性能指标。让页面效果能够达到&gt;=60fps(帧)/s的刷新频率以避免出现卡顿。</p>
+</blockquote>
+<blockquote>
+<p>为什么是60fps? 目前大多数显示器的刷新率相吻合(60Hz)。如果网页动画能够做到每秒60帧，就会跟显示器同步刷新，达到最佳的视觉效果。60 HZ/s，每个帧的工作（从 JS 到绘制）完成时间小于 16ms,达到人眼顺滑（例如滚动 拖动）。</p>
+</blockquote>
+<blockquote>
+<p>观察FPS图表，如果你发现了一个红色的长条，那么就说明这些帧存在严重问题（有掉帧情况），有可能导致非常差的用户体验。一般来说，绿色的长条越高，说明FPS越高，用户体验越好。</p>
+</blockquote>
+<h4 id="14-frames">1.4 Frames</h4>
+<p><img class="img-zoomable" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8b8ca76678174cec82f0bbc3e6e16ac5~tplv-k3u1fbpfcp-watermark.image" alt="FBS-3.png" />
+</p>
+<blockquote>
+<p>more -&gt; more tools -&gt; Rendering -&gt;Frame Rending Status 可看实时帧率。</p>
+</blockquote>
+<blockquote>
+<p>more -&gt; more tools -&gt; Rendering -&gt;Paint flashing 页面上有哪些内容被重绘了。</p>
+</blockquote>
+<p><img class="img-zoomable" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/02cf4adb8a67479a9cd6e75ec0c0d6de~tplv-k3u1fbpfcp-watermark.image" alt="FBS-2.png" />
+</p>
+<blockquote>
+<p>点击三角箭头展开 Frames 区域，鼠标悬浮/点击绿色方块，可以看到该特定帧的帧率和渲染耗时。</p>
+</blockquote>
+<h4 id="15-cpu">1.5 CPU</h4>
+<p><img class="img-zoomable" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b885ed80f5ad47bb9d3d7251943775e5~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<p><img class="img-zoomable" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b825d120dc344e85bdab55d495a522b7~tplv-k3u1fbpfcp-watermark.image" alt="CPU-3.png" />
+</p>
+<p>顏色块的表示：</p>
+<ol>
+<li>蓝色为HTML文件</li>
+<li>黃色为脚本</li>
+<li>紫色为样式</li>
+<li>绿色为媒体文件</li>
+<li>灰色为其他資源</li>
+</ol>
+<blockquote>
+<p>总结：当 CPU 长时间被占满，就是当前网页性能需要优化的信号。CPU 图表中，可以根据颜色填充的饱满程度，确定 CPU 的忙闲，进而了解该页面的总的任务量(鼠标悬停可见)。而 Summary 饼图则以一种直观的方式告诉了我们，哪个类型的任务最耗时。</p>
+</blockquote>
+<h4 id="16-heap">1.6 HEAP</h4>
+<p><img class="img-zoomable" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/55cc8f619f38467190582c15c88476d6~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<p><img class="img-zoomable" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/45e0d75db73b42ed8f1872fd7e2a2c62~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<blockquote>
+<p>在 HEAP 图表中可以看到 JS 内存占用情况，与下方的 memory 窗格中的JS Heap相对应。在 Memory 窗格还可以看到 Document 文档、Nodes DOM 节点、监听器、GPU 内存的习份内存统计。</p>
+</blockquote>
+<h4 id="17-network">1.7 Network</h4>
+<p><img class="img-zoomable" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2e4bee0bfe5742eb966587bdfcd60b0c~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<p><img class="img-zoomable" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/147b46af44ed4e0fbb3abad9eee5b496~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<blockquote>
+<p>鼠标悬停可以看到具体的网络请求以及获取请求的时间。网络请求时间过长会影响白屏时间。</p>
+</blockquote>
+<h4 id="18-事件时间点">1.8 事件时间点</h4>
+<p><img class="img-zoomable" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/44b2f60ed07642ceb4d7724890fe58f4~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<ol>
+<li>FP：First Paint(页面在导航后首次呈现出不同于导航前内容的时间点)；</li>
+<li>FCP：First Contentful Paint(首次绘制任何文本，图像，非空白canvas或SVG的时间点)；</li>
+<li>LCP：Largest Contenful Paint(页面开始加载到最大文本块内容或图片显示在页面中的时间)；</li>
+<li>DCL：DOMContentLoaded Event(HTML加载完成事件)</li>
+<li>L：OnLoad Event(页面所有资源加载完成事件)。</li>
+</ol>
+<h4 id="19-main">1.9 Main</h4>
+<p><img class="img-zoomable" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eec6a4c05178425280110b963dc7176b~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<p><img class="img-zoomable" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5d6ce7ede6d040d2a8ef9948f63e7405~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<ol>
+<li>展开 Main 图表，Devtools 展示了主线程运行状况。X轴代表着时间。每个长条代表着一个 event。长条越长就代表这个 event花费的时间越长。Y轴代表了调用栈（call stack）。在栈里，上面的 event 调用了下面的event。</li>
+<li>在事件长条的右上角出，如果出现了红色小三角，说明这个事件是存在问题的，需要特别注意。</li>
+<li>双击这个带有红色小三角的的事件。在Summary 面板会看到详细信息。注意 reveal这个链接，双击它会让高亮触发这个事件的 event。如果点击代码提示链接，就会跳转到对应的代码处。</li>
+</ol>
+<h3 id="2-performance-api">2 Performance API</h3>
+<blockquote>
+<p>在 performance 的 timing 属性中，我们可以查看到时间戳。在 performance 的 memory属性中可以查看浏览器内存情況。</p>
+</blockquote>
+<p><img class="img-zoomable" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d725e69d6690463ea5e64d0c1272d174~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<h4 id="21-这些时间戳与页面整个加载流程中的关键时间节点有着一一对应的关系">2.1 这些时间戳与页面整个加载流程中的关键时间节点有着一一对应的关系</h4>
+<p><img class="img-zoomable" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/958afb38444a438e8e64f64fd938b8ad~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<h4 id="22-通过求两个时间点之间的差值我们可以得出某个过程花费的时间">2.2 通过求两个时间点之间的差值，我们可以得出某个过程花费的时间</h4>
+<p><img class="img-zoomable" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6a61a06f38a8448abbb9d72661417158~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<h4 id="23-关键性能指标firstbytefptttiready-和-load-时间">2.3 关键性能指标：firstbyte、fpt、tti、ready 和 load 时间</h4>
+<p><img class="img-zoomable" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6520eb4520f644e18f7b2151b25ccd40~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<h3 id="3-lighthouse">3 LightHouse</h3>
+<blockquote>
+<p>Lighthouse 是一个开源的自动化工具，用于改进网络应用的质量。你可以将其作为一个 Chrome 扩展程序运行，或从命令行运行。为Lighthouse 提供一个需要审查的网址，它将针对此页面运行一连串的测试，然后生成一个有关页面性能的报告。</p>
+</blockquote>
+<h4 id="31-指标">3.1 指标</h4>
+<blockquote>
+<p>页面性能、可访问性（无障碍）、最佳实践、SEO、PWA（渐进式 Web 应用） 五项指标的跑分。向下拉动 Report 页，我们还可以看到每一个指标的细化评。</p>
+</blockquote>
+<p><img class="img-zoomable" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1e7f786747284b7fab106ea41144b103~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<p><img class="img-zoomable" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f668d56216984b40a080e5323bdf6f8e~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<p><img class="img-zoomable" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a101a585a6474bad807859331bf082aa~tplv-k3u1fbpfcp-watermark.image" alt="image.png" />
+</p>
+<blockquote>
+<p>在 “Opportunities” 中，LightHouse 甚至针对我们的性能问题给出了可行的建议、以及每一项优化操作预期会帮我们节省的时间。</p>
+</blockquote>
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-weixin">
+      微信扫码关注公众号
+      <br/>
+      <img class="lazyload" src="/images/weixin/qrcode.jpg" />
+      <br/>
+      <h3> 【码农熊猫】 </h3>
+    </div>
+    
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">首页</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">归档</a>
+            </li>
+            
+            <li>
+                <a href="/about/">关于</a>
+            </li>
+            
+            <li>
+                <a href="/search/">搜索</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/eyougo" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/caching/">Caching</a>
+            </span>
+            
+            <span>
+                <a href="/tags/http-client-side/">HTTP Client-Side</a>
+            </span>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/performance/">Performance</a>
+            </span>
+            
+            <span>
+                <a href="/tags/redis/">Redis</a>
+            </span>
+            
+            <span>
+                <a href="/tags/security/">Security</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring/">Spring</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-boot/">Spring Boot</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-data/">Spring Data</a>
+            </span>
+            
+            <span>
+                <a href="/tags/testing/">Testing</a>
+            </span>
+            
+            <span>
+                <a href="/tags/web/">Web</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-performance">1 Performance</a></li>
+        <li><a href="#2-performance-api">2 Performance API</a></li>
+        <li><a href="#3-lighthouse">3 LightHouse</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-weixin">
+      微信扫码关注公众号
+      <br/>
+      <img class="lazyload" src="/images/weixin/qrcode.jpg" />
+      <br/>
+      <h3> 【码农熊猫】 </h3>
+    </div>
+    
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">首页</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">归档</a>
+            </li>
+            
+            <li>
+                <a href="/about/">关于</a>
+            </li>
+            
+            <li>
+                <a href="/search/">搜索</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/eyougo" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/caching/">Caching</a>
+            </span>
+            
+            <span>
+                <a href="/tags/http-client-side/">HTTP Client-Side</a>
+            </span>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/performance/">Performance</a>
+            </span>
+            
+            <span>
+                <a href="/tags/redis/">Redis</a>
+            </span>
+            
+            <span>
+                <a href="/tags/security/">Security</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring/">Spring</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-boot/">Spring Boot</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-data/">Spring Data</a>
+            </span>
+            
+            <span>
+                <a href="/tags/testing/">Testing</a>
+            </span>
+            
+            <span>
+                <a href="/tags/web/">Web</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-performance">1 Performance</a></li>
+        <li><a href="#2-performance-api">2 Performance API</a></li>
+        <li><a href="#3-lighthouse">3 LightHouse</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2021
+                <a href="https://pinmost.com">码农熊猫</a>
+                 | <a href="https://github.com/eyougo/hugo">Source code</a> 
+                | 基于 <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 构建
+                 | <a href="https://beian.miit.gov.cn/" target="_blank">京ICP备20026318号-1</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>
