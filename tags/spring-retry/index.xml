@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Spring on 码农熊猫</title>
-    <link>https://pinmost.com/tags/spring/</link>
-    <description>Recent content in Spring on 码农熊猫</description>
+    <title>Spring Retry on 码农熊猫</title>
+    <link>https://pinmost.com/tags/spring-retry/</link>
+    <description>Recent content in Spring Retry on 码农熊猫</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 22 Jul 2021 10:18:22 +0800</lastBuildDate><atom:link href="https://pinmost.com/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 22 Jul 2021 10:18:22 +0800</lastBuildDate><atom:link href="https://pinmost.com/tags/spring-retry/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Spring框架中一个有用的小组件：Spring Retry</title>
       <link>https://pinmost.com/post/spring-retry/</link>
@@ -17,17 +17,6 @@
 &lt;p&gt;&lt;a href=&#34;https://github.com/spring-projects/spring-retry&#34; target=&#34;_blank&#34;&gt;Spring Retry&lt;/a&gt; 是Spring框架中的一个组件，
 它提供了自动重新调用失败操作的能力。这在错误可能是暂时发生的（如瞬时网络故障）的情况下很有帮助。&lt;/p&gt;
 &lt;p&gt;在本文中，我们将看到使用Spring Retry的各种方式：注解、RetryTemplate以及回调。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Spring缓存指南</title>
-      <link>https://pinmost.com/post/spring-cache-tutorial/</link>
-      <pubDate>Wed, 07 Jul 2021 18:18:22 +0800</pubDate>
-      
-      <guid>https://pinmost.com/post/spring-cache-tutorial/</guid>
-      <description>&lt;h3 id=&#34;1缓存抽象&#34;&gt;1、缓存抽象？&lt;/h3&gt;
-&lt;p&gt;在本教程中，我们将学习如何&lt;em&gt;在Spring中使用缓存抽象&lt;/em&gt;，并从总体上改进我们系统的性能。&lt;/p&gt;
-&lt;p&gt;我们将为一些现实的方法示例启用简单的缓存，还将讨论如何通过智能的缓存管理来实际改进这些调用的性能。&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -6,7 +6,19 @@
     <description>Recent content in Posts on 码农熊猫</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 20 Jul 2021 14:18:22 +0800</lastBuildDate><atom:link href="https://pinmost.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 22 Jul 2021 10:18:22 +0800</lastBuildDate><atom:link href="https://pinmost.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring框架中一个有用的小组件：Spring Retry</title>
+      <link>https://pinmost.com/post/spring-retry/</link>
+      <pubDate>Thu, 22 Jul 2021 10:18:22 +0800</pubDate>
+      
+      <guid>https://pinmost.com/post/spring-retry/</guid>
+      <description>&lt;h3 id=&#34;1概述&#34;&gt;1、概述&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/spring-projects/spring-retry&#34; target=&#34;_blank&#34;&gt;Spring Retry&lt;/a&gt; 是Spring框架中的一个组件，
+它提供了自动重新调用失败操作的能力。这在错误可能是暂时发生的（如瞬时网络故障）的情况下很有帮助。&lt;/p&gt;
+&lt;p&gt;在本文中，我们将看到使用Spring Retry的各种方式：注解、RetryTemplate以及回调。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>三种方式分析监测web前端性能</title>
       <link>https://pinmost.com/post/web-performence/</link>
@@ -14,7 +26,7 @@
       
       <guid>https://pinmost.com/post/web-performence/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;原文地址：&lt;a href=&#34;https://juejin.cn/post/6981315563104501790&#34;&gt;https://juejin.cn/post/6981315563104501790&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;原文地址：&lt;a href=&#34;https://juejin.cn/post/6981315563104501790&#34; target=&#34;_blank&#34;&gt;https://juejin.cn/post/6981315563104501790&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;原作者：&lt;a href=&#34;https://juejin.cn/user/2735240658560408&#34; target=&#34;_blank&#34;&gt;这些年你跑哪去了&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;从Performance、Performance API、LightHouse三个方向来分析前端性能。&lt;/p&gt;

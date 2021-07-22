@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.86.0" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+<link rel="manifest" href="/images/favicons/site.webmanifest">
+<link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+
+<title>Spring框架中一个有用的小组件：Spring Retry - 码农熊猫</title>
+
+
+<meta name="author" content="码农熊猫" />
+
+
+<meta name="description" content="6年业余，13年专业。空谈误国，code兴邦。" />
+
+
+<meta name="keywords" content="Spring, Spring Retry" />
+
+
+<meta property="og:title" content="Spring框架中一个有用的小组件：Spring Retry" />
+<meta name="twitter:title" content="Spring框架中一个有用的小组件：Spring Retry" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pinmost.com/post/spring-retry/" /><meta property="og:description" content="1、概述
+Spring Retry 是Spring框架中的一个组件，
+它提供了自动重新调用失败操作的能力。这在错误可能是暂时发生的（如瞬时网络故障）的情况下很有帮助。
+在本文中，我们将看到使用Spring Retry的各种方式：注解、RetryTemplate以及回调。" />
+<meta name="twitter:description" content="1、概述
+Spring Retry 是Spring框架中的一个组件，
+它提供了自动重新调用失败操作的能力。这在错误可能是暂时发生的（如瞬时网络故障）的情况下很有帮助。
+在本文中，我们将看到使用Spring Retry的各种方式：注解、RetryTemplate以及回调。" /><meta property="og:image" content="https://pinmost.com/img/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://pinmost.com/img/og.png" /><meta property="article:published_time" content="2021-07-22T10:18:22+08:00" /><meta property="article:modified_time" content="2021-07-22T10:18:22+08:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://pinmost.com/assets/css/fuji.min.css" />
+
+
+
+
+
+
+<script>
+    window.ga_tid = 'UA-104688192-1';
+    window.ga_api = 'https:\/\/pinmost-google-analytics.eyougo.workers.dev';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+
+</head>
+
+<body
+  data-theme="auto"
+  data-theme-auto='true'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://pinmost.com">码农熊猫</a>
+            
+            <span class="title-sub">6年业余，13年专业。空谈误国，code兴邦。</span>
+            
+            <div class="header-weixin">
+              <img class="lazyload" src="/images/weixin/qrcode_search.jpg" />
+            </div>
+        </div>
+    </div>
+</header>
+
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://pinmost.com/post/spring-retry/">Spring框架中一个有用的小组件：Spring Retry</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-07-22</span>
+
+<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2209 字</span>
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/spring">Spring</a>&nbsp;<a href="/tags/spring-retry">Spring Retry</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        <h3 id="1概述">1、概述</h3>
+<p><a href="https://github.com/spring-projects/spring-retry" target="_blank">Spring Retry</a> 是Spring框架中的一个组件，
+它提供了自动重新调用失败操作的能力。这在错误可能是暂时发生的（如瞬时网络故障）的情况下很有帮助。</p>
+<p>在本文中，我们将看到使用Spring Retry的各种方式：注解、RetryTemplate以及回调。</p>
+<h3 id="2maven依赖">2、Maven依赖</h3>
+<p>让我们首先将<code>spring-retry</code>依赖项添加到我们的<code>pom.xml</code>文件中：</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.retry&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-retry&lt;/artifactId&gt;
+    &lt;version&gt;1.2.5.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>我们还需要将Spring AOP添加到我们的项目中：</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;
+    &lt;version&gt;5.2.8.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>可以查看Maven Central来获取最新版本的<a href="https://search.maven.org/search?q=spring-retry" target="_blank"><code>spring-retry</code></a>
+和<a href="https://search.maven.org/search?q=a:spring-aspects" target="_blank"><code>spring-aspects</code></a> 依赖项。</p>
+<h3 id="3开启spring-retry">3、开启Spring Retry</h3>
+<p>要在应用程序中启用Spring Retry，我们需要将<code>@EnableRetry</code>注释添加到我们的<code>@Configuration</code>类：</p>
+<pre><code class="language-java">@Configuration
+@EnableRetry
+public class AppConfig { ... }
+</code></pre>
+<h3 id="4使用spring-retry">4、使用Spring Retry</h3>
+<h4 id="41retryable而不用恢复">4.1、<code>@Retryable</code>而不用恢复</h4>
+<p>我们可以使用<code>@Retryable</code>注解为方法添加重试功能：</p>
+<pre><code class="language-java">@Service
+public interface MyService {
+    @Retryable(value = RuntimeException.class)
+    void retryService(String sql);
+
+}
+</code></pre>
+<p>在这里，当抛出RuntimeException时尝试重试。</p>
+<p>根据@Retryable的默认行为，重试最多可能发生3次，重试之间有1秒的延迟。</p>
+<h4 id="42retryable和recover">4.2、<code>@Retryable</code>和<code>@Recover</code></h4>
+<p>现在让我们使用<code>@Recover</code>注解添加一个恢复方法：</p>
+<pre><code class="language-java">@Service
+public interface MyService {
+    @Retryable(value = SQLException.class)
+    void retryServiceWithRecovery(String sql) throws SQLException;
+        
+    @Recover
+    void recover(SQLException e, String sql);
+}
+</code></pre>
+<p>这里，当抛出<code>SQLException</code>时重试会尝试运行。 当<code>@Retryable</code>方法因指定异常而失败时，<code>@Recover</code>注解定义了一个单独的恢复方法。</p>
+<p>因此，如果<code>retryServiceWithRecovery</code>方法在三次尝试之后还是抛出了<code>SQLException</code>，那么<code>recover()</code>方法将被调用。</p>
+<p>恢复处理程序的第一个参数应该是<code>Throwable</code>类型（可选）和相同的返回类型。其余的参数按相同顺序从失败方法的参数列表中填充。</p>
+<h4 id="43自定义retryable的行为">4.3、自定义<code>@Retryable</code>的行为</h4>
+<p>为了自定义重试的行为，我们可以使用参数<code>maxAttempts</code>和<code>backoff</code>：</p>
+<pre><code class="language-java">@Service
+public interface MyService {
+    @Retryable( value = SQLException.class, 
+      maxAttempts = 2, backoff = @Backoff(delay = 100))
+    void retryServiceWithCustomization(String sql) throws SQLException;
+}
+</code></pre>
+<p>这样最多将有两次尝试和100毫秒的延迟。</p>
+<h3 id="44使用spring-properties">4.4、使用Spring Properties</h3>
+<p>我们还可以在<code>@Retryable</code>注解中使用properties。</p>
+<p>为了演示这一点，我们将看到如何将<code>delay</code>和<code>maxAttempts</code>的值外部化到一个properties文件中。</p>
+<p>首先，让我们在名为<code>retryConfig.properties</code>的文件中定义属性：</p>
+<pre><code class="language-properties">retry.maxAttempts=2
+retry.maxDelay=100
+</code></pre>
+<p>然后我们指示<code>@Configuration</code>类加载这个文件：</p>
+<pre><code class="language-java">@PropertySource(&quot;classpath:retryConfig.properties&quot;)
+public class AppConfig { ... }
+// ...
+</code></pre>
+<p>最后，我们可以在<code>@Retryable</code>的定义中注入<code>retry.maxAttempts</code>和<code>retry.maxDelay</code>的值：</p>
+<pre><code class="language-java">@Service 
+public interface MyService { 
+  @Retryable( value = SQLException.class, maxAttemptsExpression = &quot;${retry.maxAttempts}&quot;,
+            backoff = @Backoff(delayExpression = &quot;${retry.maxDelay}&quot;)) 
+  void retryServiceWithExternalizedConfiguration(String sql) throws SQLException; 
+}
+</code></pre>
+<p>请注意，我们现在使用的是<code>maxAttemptsExpression</code>和<code>delayExpression</code>而不是<code>maxAttempts</code>和<code>delay</code>。</p>
+<h3 id="5retrytemplate">5、<code>RetryTemplate</code></h3>
+<h4 id="51retryoperations">5.1、<code>RetryOperations</code></h4>
+<p>Spring Retry提供了<code>RetryOperations</code>接口，它提供了一组<code>execute()</code>方法：</p>
+<pre><code class="language-java">public interface RetryOperations {
+    &lt;T&gt; T execute(RetryCallback&lt;T&gt; retryCallback) throws Exception;
+
+    ...
+}
+</code></pre>
+<p><code>execute()</code>方法的参数<code>RetryCallback</code>，是一个接口，可以插入需要在失败时重试的业务逻辑：</p>
+<pre><code class="language-java">public interface RetryCallback&lt;T&gt; {
+    T doWithRetry(RetryContext context) throws Throwable;
+}
+</code></pre>
+<h4 id="52retrytemplate配置">5.2、<code>RetryTemplate</code>配置</h4>
+<p><code>RetryTemplate</code>是<code>RetryOperations</code>的一个实现。</p>
+<p>让我们在<code>@Configuration</code>类中配置一个<code>RetryTemplate</code>的bean：</p>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+    //...
+    @Bean
+    public RetryTemplate retryTemplate() {
+        RetryTemplate retryTemplate = new RetryTemplate();
+		
+        FixedBackOffPolicy fixedBackOffPolicy = new FixedBackOffPolicy();
+        fixedBackOffPolicy.setBackOffPeriod(2000l);
+        retryTemplate.setBackOffPolicy(fixedBackOffPolicy);
+
+        SimpleRetryPolicy retryPolicy = new SimpleRetryPolicy();
+        retryPolicy.setMaxAttempts(2);
+        retryTemplate.setRetryPolicy(retryPolicy);
+		
+        return retryTemplate;
+    }
+}
+</code></pre>
+<p>这个<code>RetryPolicy</code>确定了何时应该重试操作。</p>
+<p>其中<code>SimpleRetryPolicy</code>定义了重试的固定次数，另一方面，<code>BackOffPolicy</code>用于控制重试尝试之间的回退。</p>
+<p>最后，<code>FixedBackOffPolicy</code>会使重试在继续之前暂停一段固定的时间。</p>
+<h4 id="53使用retrytemplate">5.3、使用<code>RetryTemplate</code></h4>
+<p>要使用重试处理来运行代码，我们可以调用<code>retryTemplate.execute()</code>方法：</p>
+<pre><code class="language-java">retryTemplate.execute(new RetryCallback&lt;Void, RuntimeException&gt;() {
+    @Override
+    public Void doWithRetry(RetryContext arg0) {
+        myService.templateRetryService();
+        ...
+    }
+});
+</code></pre>
+<p>我们可以使用lambda表达式代替匿名类：</p>
+<pre><code class="language-java">retryTemplate.execute(arg0 -&gt; {
+    myService.templateRetryService();
+    return null;
+});
+</code></pre>
+<h3 id="6监听器">6、监听器</h3>
+<p>监听器在重试时提供另外的回调。我们可以用这些来关注跨不同重试的各个横切点。</p>
+<h4 id="61添加回调">6.1、添加回调</h4>
+<p>回调在<code>RetryListener</code>接口中提供：</p>
+<pre><code class="language-java">public class DefaultListenerSupport extends RetryListenerSupport {
+    @Override
+    public &lt;T, E extends Throwable&gt; void close(RetryContext context,
+      RetryCallback&lt;T, E&gt; callback, Throwable throwable) {
+        logger.info(&quot;onClose&quot;);
+        ...
+        super.close(context, callback, throwable);
+    }
+
+    @Override
+    public &lt;T, E extends Throwable&gt; void onError(RetryContext context,
+      RetryCallback&lt;T, E&gt; callback, Throwable throwable) {
+        logger.info(&quot;onError&quot;); 
+        ...
+        super.onError(context, callback, throwable);
+    }
+
+    @Override
+    public &lt;T, E extends Throwable&gt; boolean open(RetryContext context,
+      RetryCallback&lt;T, E&gt; callback) {
+        logger.info(&quot;onOpen&quot;);
+        ...
+        return super.open(context, callback);
+    }
+}
+</code></pre>
+<p><code>open</code>和<code>close</code>的回调在整个重试之前和之后执行，而<code>onError</code>应用于单个<code>RetryCallback</code>调用。</p>
+<h4 id="62注册监听器">6.2、注册监听器</h4>
+<p>接下来，我们将我们的监听器<code>（DefaultListenerSupport）</code>注册到我们的<code>RetryTemplate</code> bean：</p>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+    ...
+
+    @Bean
+    public RetryTemplate retryTemplate() {
+        RetryTemplate retryTemplate = new RetryTemplate();
+        ...
+        retryTemplate.registerListener(new DefaultListenerSupport());
+        return retryTemplate;
+    }
+}
+</code></pre>
+<h3 id="7测试结果">7、测试结果</h3>
+<p>为了完成我们的示例，让我们验证一下结果：</p>
+<pre><code class="language-java">@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(
+  classes = AppConfig.class,
+  loader = AnnotationConfigContextLoader.class)
+public class SpringRetryIntegrationTest {
+
+    @Autowired
+    private MyService myService;
+
+    @Autowired
+    private RetryTemplate retryTemplate;
+
+    @Test(expected = RuntimeException.class)
+    public void givenTemplateRetryService_whenCallWithException_thenRetry() {
+        retryTemplate.execute(arg0 -&gt; {
+            myService.templateRetryService();
+            return null;
+        });
+    }
+}
+</code></pre>
+<p>从测试日志中可以看出，我们已经正确配置了<code>RetryTemplate</code>和<code>RetryListener</code>：</p>
+<pre><code>2020-01-09 20:04:10 [main] INFO  c.p.s.DefaultListenerSupport - onOpen 
+2020-01-09 20:04:10 [main] INFO  c.pinmost.springretry.MyServiceImpl - throw RuntimeException in method templateRetryService() 
+2020-01-09 20:04:10 [main] INFO  c.p.s.DefaultListenerSupport - onError 
+2020-01-09 20:04:12 [main] INFO  c.pinmost.springretry.MyServiceImpl - throw RuntimeException in method templateRetryService() 
+2020-01-09 20:04:12 [main] INFO  c.p.s.DefaultListenerSupport - onError 
+2020-01-09 20:04:12 [main] INFO  c.p.s.DefaultListenerSupport - onClose
+</code></pre>
+<h3 id="8结论">8、结论</h3>
+<p>在本文中，我们看到了如何使用注解、<code>RetryTemplate</code>和回调监听器来使用Spring Retry。</p>
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-weixin">
+      微信扫码关注公众号
+      <br/>
+      <img class="lazyload" src="/images/weixin/qrcode.jpg" />
+      <br/>
+      <h3> 【码农熊猫】 </h3>
+    </div>
+    
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">首页</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">归档</a>
+            </li>
+            
+            <li>
+                <a href="/about/">关于</a>
+            </li>
+            
+            <li>
+                <a href="/search/">搜索</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/eyougo" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/caching/">Caching</a>
+            </span>
+            
+            <span>
+                <a href="/tags/http-client-side/">HTTP Client-Side</a>
+            </span>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/performance/">Performance</a>
+            </span>
+            
+            <span>
+                <a href="/tags/redis/">Redis</a>
+            </span>
+            
+            <span>
+                <a href="/tags/security/">Security</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring/">Spring</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-boot/">Spring Boot</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-data/">Spring Data</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-retry/">Spring Retry</a>
+            </span>
+            
+            <span>
+                <a href="/tags/testing/">Testing</a>
+            </span>
+            
+            <span>
+                <a href="/tags/web/">Web</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1概述">1、概述</a></li>
+        <li><a href="#2maven依赖">2、Maven依赖</a></li>
+        <li><a href="#3开启spring-retry">3、开启Spring Retry</a></li>
+        <li><a href="#4使用spring-retry">4、使用Spring Retry</a></li>
+        <li><a href="#44使用spring-properties">4.4、使用Spring Properties</a></li>
+        <li><a href="#5retrytemplate">5、<code>RetryTemplate</code></a></li>
+        <li><a href="#6监听器">6、监听器</a></li>
+        <li><a href="#7测试结果">7、测试结果</a></li>
+        <li><a href="#8结论">8、结论</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-weixin">
+      微信扫码关注公众号
+      <br/>
+      <img class="lazyload" src="/images/weixin/qrcode.jpg" />
+      <br/>
+      <h3> 【码农熊猫】 </h3>
+    </div>
+    
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">首页</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">归档</a>
+            </li>
+            
+            <li>
+                <a href="/about/">关于</a>
+            </li>
+            
+            <li>
+                <a href="/search/">搜索</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/eyougo" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/caching/">Caching</a>
+            </span>
+            
+            <span>
+                <a href="/tags/http-client-side/">HTTP Client-Side</a>
+            </span>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/performance/">Performance</a>
+            </span>
+            
+            <span>
+                <a href="/tags/redis/">Redis</a>
+            </span>
+            
+            <span>
+                <a href="/tags/security/">Security</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring/">Spring</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-boot/">Spring Boot</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-data/">Spring Data</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-retry/">Spring Retry</a>
+            </span>
+            
+            <span>
+                <a href="/tags/testing/">Testing</a>
+            </span>
+            
+            <span>
+                <a href="/tags/web/">Web</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1概述">1、概述</a></li>
+        <li><a href="#2maven依赖">2、Maven依赖</a></li>
+        <li><a href="#3开启spring-retry">3、开启Spring Retry</a></li>
+        <li><a href="#4使用spring-retry">4、使用Spring Retry</a></li>
+        <li><a href="#44使用spring-properties">4.4、使用Spring Properties</a></li>
+        <li><a href="#5retrytemplate">5、<code>RetryTemplate</code></a></li>
+        <li><a href="#6监听器">6、监听器</a></li>
+        <li><a href="#7测试结果">7、测试结果</a></li>
+        <li><a href="#8结论">8、结论</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2021
+                <a href="https://pinmost.com">码农熊猫</a>
+                 | <a href="https://github.com/eyougo/hugo">Source code</a> 
+                | 基于 <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 构建
+                 | <a href="https://beian.miit.gov.cn/" target="_blank">京ICP备20026318号-1</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>
