@@ -95,7 +95,7 @@ public interface MyService {
 ```
 这样最多将有两次尝试和100毫秒的延迟。
 
-### 4.4、使用Spring Properties
+#### 4.4、使用Spring Properties
 
 我们还可以在`@Retryable`注解中使用properties。
 
