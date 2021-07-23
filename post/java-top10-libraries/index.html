@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.86.0" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+<link rel="manifest" href="/images/favicons/site.webmanifest">
+<link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+
+<title>每个Java程序员都应该知道的10个顶级库 - 码农熊猫</title>
+
+
+<meta name="author" content="码农熊猫" />
+
+
+<meta name="description" content="6年业余，13年专业。空谈误国，code兴邦。" />
+
+
+<meta name="keywords" content="Java" />
+
+
+<meta property="og:title" content="每个Java程序员都应该知道的10个顶级库" />
+<meta name="twitter:title" content="每个Java程序员都应该知道的10个顶级库" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pinmost.com/post/java-top10-libraries/" /><meta property="og:description" content="Java之所以是业务应用程序开发中排名第一的编程语言，同时还是顶级编程语言之一，很重要的原因是Java拥有功能丰富且庞大的核心库。
+虽然Java标准库功能已经很强大，但在专业软件开发中还是需要其他Java库。
+经过20多年在行业和社区中的积极开发和应用，Java拥有了许多成熟而有用的库。
+在这里，列出了所有领域的Java应用程序中使用的前10个Java库。无论你是为业余项目还是企业级项目开发软件，都可能需要在下面列出的大多数库。" />
+<meta name="twitter:description" content="Java之所以是业务应用程序开发中排名第一的编程语言，同时还是顶级编程语言之一，很重要的原因是Java拥有功能丰富且庞大的核心库。
+虽然Java标准库功能已经很强大，但在专业软件开发中还是需要其他Java库。
+经过20多年在行业和社区中的积极开发和应用，Java拥有了许多成熟而有用的库。
+在这里，列出了所有领域的Java应用程序中使用的前10个Java库。无论你是为业余项目还是企业级项目开发软件，都可能需要在下面列出的大多数库。" /><meta property="og:image" content="https://pinmost.com/img/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://pinmost.com/img/og.png" /><meta property="article:published_time" content="2021-07-23T16:10:22+08:00" /><meta property="article:modified_time" content="2021-07-23T16:10:22+08:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://pinmost.com/assets/css/fuji.min.css" />
+
+
+
+
+
+
+<script>
+    window.ga_tid = 'UA-104688192-1';
+    window.ga_api = 'https:\/\/pinmost-google-analytics.eyougo.workers.dev';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+
+</head>
+
+<body
+  data-theme="auto"
+  data-theme-auto='true'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://pinmost.com">码农熊猫</a>
+            
+            <span class="title-sub">6年业余，13年专业。空谈误国，code兴邦。</span>
+            
+            <div class="header-weixin">
+              <img class="lazyload" src="/images/weixin/qrcode_search.jpg" />
+            </div>
+        </div>
+    </div>
+</header>
+
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://pinmost.com/post/java-top10-libraries/">每个Java程序员都应该知道的10个顶级库</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-07-23</span>
+
+<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3528 字</span>
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        <p>Java之所以是业务应用程序开发中排名第一的编程语言，同时还是顶级编程语言之一，很重要的原因是Java拥有功能丰富且庞大的核心库。</p>
+<p>虽然Java标准库功能已经很强大，但在专业软件开发中还是需要其他Java库。</p>
+<p>经过20多年在行业和社区中的积极开发和应用，Java拥有了许多成熟而有用的库。</p>
+<p>在这里，列出了所有领域的Java应用程序中使用的前10个Java库。无论你是为业余项目还是企业级项目开发软件，都可能需要在下面列出的大多数库。</p>
+<h3 id="apache-commons">Apache Commons</h3>
+<p><code>Apache Commons</code>就像是Java软件开发中的一把瑞士军刀，它扩展了许多Java核心库。</p>
+<p>如果你想在项目中编写一个工具类，那么很可能已经存在一个成熟且强大的<code>Apache Commons</code>库了。</p>
+<p><code>Apache Commons</code>包含43个模块化库，涵盖了集合、数学、类、数据库、缓存、I/O工具包等等领域。</p>
+<p>它被业界广泛使用，几乎是非官方的Java标准库增强。如果你正在处理一个大项目并且没有使用任何<code>Apache Commons</code>库，那么很可能你是在重新发明轮子。</p>
+<h4 id="主要特点">主要特点：</h4>
+<ul>
+<li>Java集合框架扩展</li>
+<li>数学和统计组件</li>
+<li>JDBC助手</li>
+<li>Java类工具</li>
+<li>I/O工具包</li>
+<li>日志工具包</li>
+</ul>
+<h4 id="项目链接">项目链接：</h4>
+<p><a href="commons.apache.org">commons.apache.org</a></p>
+<h3 id="google-guava">Google Guava</h3>
+<p><code>Google Guava</code>是另一个顶级的通用Java库。最初由Google开发，由著名软件工程师和作家 Joshua Bloch 设计。</p>
+<p>它现在是一个开源项目，谷歌以外的许多工程师都做出了贡献。与<code>Apache Commons</code>一样，它也是模块化的，包含许多独立的库。</p>
+<p>它涵盖了基本工具包、集合、字符串操作、并发工具包、图形库、I/O工具包、散列等等。</p>
+<p>与<code>Apache Commons</code>库相比，<code>Google Guava</code>具有更好的软件设计。如果你发现需要创建共享库或工具类，那么首先看下<code>Google Guava</code>库。</p>
+<h4 id="主要特点-1">主要特点：</h4>
+<ul>
+<li>Java集合框架扩展</li>
+<li>I/O工具包</li>
+<li>并发工具包</li>
+<li>字符串工具</li>
+<li>缓存支持。</li>
+<li>散列支持。</li>
+</ul>
+<h4 id="链接地址">链接地址：</h4>
+<p><a href="https://github.com/google/guava" target="_blank">https://github.com/google/guava</a></p>
+<h3 id="jackson">Jackson</h3>
+<p>在软件开发中，你必须处理各种格式的数据。要么必须以不同格式加载或保存数据，要么必须以各种格式传输数据。</p>
+<p><code>JSON</code>是现代软件开发中最常见的数据交换格式。其他常见的数据格式有<code>Avro</code>、<code>XML</code>、<code>YAML</code>、<code>Protobuf</code>、<code>CSV</code>、<code>BSON</code>、<code>CBR</code>等等。</p>
+<p><code>Jackson</code>是一套Java数据处理库，<code>Jackson JSON</code>是最常见的流式JSON解析器/生成器库。</p>
+<p>它还支持其他数据格式，例如<code>Avro</code>、<code>BSON</code>、<code>CBOR</code>、<code>CSV</code>、<code>Smile</code>、<code>Protobuf</code>、<code>XML</code>或<code>YAML</code>，以及一些数据类型，例如<code>Guava</code>、<code>Joda</code>、<code>PCollections</code>等等。</p>
+<p><code>Jackson</code>还提供数据绑定和注解。你可以在<code>Jackson</code>注解的帮助下将<code>POJO</code>转换为数据或从数据生成<code>POJO</code>。
+如果你使用这些数据格式，Jackson是必备工具集。它是高度模块化的，具有提供基本功能的核心模块和各种扩展模块。</p>
+<h4 id="主要特点-2">主要特点：</h4>
+<ul>
+<li>流、注解、数据绑定的核心模块，并支持<code>JSON</code>数据格式。</li>
+<li>数据类型<code>Avro</code>、<code>CBOR</code>、<code>CSV</code>、<code>Ion</code>、<code>Protobuf</code>、<code>Smile</code>、<code>XML</code>、<code>YAML</code>等的特定模块。</li>
+<li><code>Kotlin</code>的原生类型。</li>
+<li><code>JSON</code>的模式。</li>
+<li>标准和集合的数据类型。</li>
+<li>支持第三方数据类型（<code>Yandex Bolts</code>、<code>GeoJSON</code>、<code>Lombok</code>、<code>MongoDB</code>等等）。</li>
+</ul>
+<h4 id="项目链接-1">项目链接：</h4>
+<p><a href="https://github.com/FasterXML/jackson" target="_blank">https://github.com/FasterXML/jackson</a></p>
+<h3 id="jaxb">JAXB</h3>
+<p>正如前一节所讨论的，<code>XML</code>是另一种流行的数据格式，它提供更严格的数据验证、存储和传输。</p>
+<p>在<code>Java 8</code>之前，Java标准库支持<code>XML</code>，包括数据绑定。</p>
+<p>从<code>Java 9</code>开始，<code>XML</code>处理功能不再是标准Java库的一部分，而是移到了单独的库<code>JAXB</code>中。</p>
+<p><code>JAXB</code>提供了在<code>Java</code>中使用<code>XML</code>所需的一切。它提供了一种在<code>XML</code>和<code>Java</code>代码之间进行映射的标准且有效的方法，它还包括基于注解的数据绑定。</p>
+<h4 id="主要特点-3">主要特点：</h4>
+<ul>
+<li>支持所有W3C <code>XML</code>架构功能。</li>
+<li>基于注解的<code>Java</code> 到<code>XML</code>数据绑定。</li>
+<li>验证器。</li>
+</ul>
+<h4 id="项目链接-2">项目链接：</h4>
+<p><a href="https://javaee.github.io/jaxb-v2/" target="_blank">https://javaee.github.io/jaxb-v2/</a></p>
+<h3 id="slf4j">SLF4J</h3>
+<p>日志记录是生产级软件开发需要集成且必不可少的一个部分。详细的日志记录将帮助你了解软件的工作情况并找到错误的根本原因，尤其是在生产系统中。</p>
+<p><code>Java</code>标准库在<code>java.util.Logging</code>中提供基本的日志记录。还有其他日志库，如<code>Log4j</code>、<code>Log4j 2</code>、<code>Logback</code>，它们在<code>Java</code>中提供高级日志记录功能。
+虽然这些日志库提供了具体的实现，但`SLF4J 为各种日志库提供了抽象或外观，它允许用户在部署期间更改所需的日志库。</p>
+<p>开始时，使用额外的外观库<code>SLF4J</code>进行日志记录可能会适得其反。但是，如果需要，使用<code>SLF4J</code>将为你提供额外的灵活性，可以毫不费力地更改具体的日志记录库。使用你喜欢的日志框架作为<code>SLF4J</code>的可插入记录器总是一个好主意。</p>
+<h4 id="主要特点-4">主要特点：</h4>
+<ul>
+<li>提供底层日志框架的抽象。</li>
+<li>日志框架可以在运行时更改。</li>
+<li>支持所有主要的日志框架。</li>
+<li>提供一个带有有用工具和功能的库 (slf4j-ext.jar)。</li>
+<li>事件记录器来记录事件。</li>
+</ul>
+<h4 id="项目链接-3">项目链接：</h4>
+<p><a href="http://www.slf4j.org/" target="_blank">http://www.slf4j.org/</a></p>
+<h3 id="log4j-2">Log4j 2</h3>
+<p><code>Java</code>中有很多优秀的日志库：<code>java.util.logging</code>、<code>Log4j</code>、<code>Log4j 2</code>、<code>Logback</code>。</p>
+<p>其中，<code>Log4j 2</code>和 <code>Logback</code>是两个最强大的日志库。我更喜欢<code>Log4j 2</code>，比<code>Logback</code>好一点，特别是对于大型项目它提供了更好的性能。对于大型项目，日志库的性能至关重要，尤其是异步日志记录、峰值吞吐量、延迟。就这些标准而言，<code>Log4j 2</code>稍微超出了<code>Logback</code>，在这个链接可以查看它的性能情况：
+<a href="https://logging.apache.org/log4j/2.x/performance.html" target="_blank">https://logging.apache.org/log4j/2.x/performance.html</a></p>
+<h4 id="主要特点-5">主要特点：</h4>
+<ul>
+<li>通过异步日志记录提高性能。</li>
+<li>将<code>API</code>与实现分开。</li>
+<li>高级的过滤方式。</li>
+<li>插件架构。</li>
+<li>云支持。</li>
+</ul>
+<h4 id="项目链接-4">项目链接：</h4>
+<p><a href="https://logging.apache.org/log4j/2.x/" target="_blank">https://logging.apache.org/log4j/2.x/</a></p>
+<h3 id="mockito">Mockito</h3>
+<p>单元/集成测试是软件开发过程的一个组成部分。
+通常你想测试单个类，但它依赖于其他重量级类或外部功能（例如数据库操作、I/O 操作），在这种情况下编写单元/集成测试的一种方法是<code>Mocking</code>。
+你可以模拟其他外部服务调用的行为，并且只关注你要测试的类。</p>
+<p><code>Mockito</code>是<code>Java</code>中使用最广泛的模拟库。无论你是在测试一个小型项目还是一个庞大而复杂的企业级<code>Java</code>项目，你都可以在任何地方使用<code>Mockito</code>。</p>
+<p>它提供了一个非常简单、干净的API，并使你的单元/集成测试保持干净。</p>
+<h4 id="主要特点-6">主要特点：</h4>
+<ul>
+<li>精益和干净的 API。</li>
+<li>提供简化的桩模型。</li>
+<li>通过<code>spy</code>进行部分<code>mock</code>。</li>
+<li>基于注解的<code>mock</code>/<code>spy</code>注入。</li>
+<li>使用<code>BDDMockito</code>的行为驱动开发语法。</li>
+</ul>
+<h4 id="项目链接-5">项目链接：</h4>
+<p><a href="https://site.mockito.org/" target="_blank">https://site.mockito.org/</a></p>
+<h3 id="assertj">AssertJ</h3>
+<p><code>AssertJ</code>是列表中第二个与<code>TDD</code>相关的库。</p>
+<p>测试的主要特征之一是验证测试结果是否与预期结果相符。
+<code>JUnit</code>在<code>org.junit.Assert</code>类中有一个内置的断言机制。它提供了几种用于测试验证的静态方法。对于专业开发人员来说，这两种方法是不够的。</p>
+<p>幸运的是，<code>Java</code>领域存在两个强大的断言库：<code>Hamcrest</code>匹配器和<code>AssertJ</code>断言。我更喜欢<code>AssertJ</code>而不是<code>Hamcrest</code>，因为它的API更流畅。</p>
+<p>它也是高度模块化的，在其核心模块中提供必要的功能，在其他模块中提供一些高级功能。</p>
+<h4 id="主要特点-7">主要特点：</h4>
+<ul>
+<li>流利的断言API以获得更好的代码可读性。</li>
+<li>丰富的断言功能和有用的错误消息。</li>
+<li>标准<code>Java</code>库的核心模块。</li>
+<li>在流行的<code>Java</code>库中提供断言的模块，例如<code>Guava</code>、<code>Joda</code>、<code>Neo4j</code>。</li>
+<li>为SQL数据库提供断言的模块。</li>
+</ul>
+<h4 id="项目链接-6">项目链接：</h4>
+<p><a href="https://assertj.github.io/doc/" target="_blank">https://assertj.github.io/doc/</a></p>
+<h3 id="hibernate">Hibernate</h3>
+<p>在我们作为软件工程师的日常生活中，我们必须与数据存储打交道。在现代，有多种类型的数据存储：<code>SQL</code>和无数的<code>NoSQL</code>数据存储。</p>
+<p>处理数据存储的一种方法是使用低级 API（例如，用于<code>SQL</code>的<code>JDBC</code>），这种方法的缺点是它不可移植。</p>
+<p>因此，处理数据存储的最佳方法是在你的应用程序和数据存储之间引入一个抽象层。此抽象层 (<code>ORM</code>) 将<code>Java</code>类与数据库表/集合映射。</p>
+<p><code>Hibernate</code>是所有编程语言中最早的<code>ORM</code>库之一，并启发了业界许多类似的技术。</p>
+<p>尽管<code>Hibernate</code>主要以<code>SQL</code>数据库的<code>ORM</code>功能而闻名，但它也扩展到了<code>NoSQL</code>数据库。</p>
+<p><code>Hibernate</code>也是模块化的，并提供了一个核心模块和基于模块化的许多功能。</p>
+<h4 id="主要特点-8">主要特点：</h4>
+<ul>
+<li>关系数据库 (ORM) 的持久化领域模型。</li>
+<li>NoSQL 数据存储 (OGM) 的持久化领域模型。</li>
+<li>领域模型的基于注解的验证。</li>
+<li>领域模型的全文搜索。</li>
+</ul>
+<h4 id="项目链接-7">项目链接：</h4>
+<p><a href="https://hibernate.org/" target="_blank">https://hibernate.org/</a></p>
+<h3 id="apache-httpcomponents">Apache HTTPComponents</h3>
+<p><code>HTTP</code>是迄今为止最常用和最流行的应用层协议。<code>Java</code>标准库没有提供太多处理<code>HTTP</code>的功能。</p>
+<p>对我们来说幸运的是，<code>Apache HTTPComponents</code>提供了一个专注于<code>HTTP</code>和相关协议的<code>Java</code>组件工具集。</p>
+<p><code>Apache HTTPComponents</code>也是高度模块化的，它提供了一个核心模块来开发低资源需求的自定义客户端/服务端<code>HTTP</code>服务。它还为异步<code>HTTP</code>客户端等高级功能提供了额外模块。</p>
+<h4 id="主要特点-9">主要特点：</h4>
+<ul>
+<li>针对客户端/服务端服务的底层<code>HTTP</code>传输组件。</li>
+<li>提供阻塞和非阻塞I/O模型。</li>
+<li>用于客户端身份验证、状态管理和连接管理的同步<code>HTTP</code>客户端。</li>
+<li>用于处理大量并发连接的异步<code>HTTP</code>客户端。</li>
+</ul>
+<h4 id="项目链接-8">项目链接：</h4>
+<p><a href="https://hc.apache.org/" target="_blank">https://hc.apache.org/</a></p>
+    </div>
+</article>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-weixin">
+      微信扫码关注公众号
+      <br/>
+      <img class="lazyload" src="/images/weixin/qrcode.jpg" />
+      <br/>
+      <h3> 【码农熊猫】 </h3>
+    </div>
+    
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">首页</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">归档</a>
+            </li>
+            
+            <li>
+                <a href="/about/">关于</a>
+            </li>
+            
+            <li>
+                <a href="/search/">搜索</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/eyougo" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/caching/">Caching</a>
+            </span>
+            
+            <span>
+                <a href="/tags/http-client-side/">HTTP Client-Side</a>
+            </span>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/performance/">Performance</a>
+            </span>
+            
+            <span>
+                <a href="/tags/redis/">Redis</a>
+            </span>
+            
+            <span>
+                <a href="/tags/security/">Security</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring/">Spring</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-boot/">Spring Boot</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-data/">Spring Data</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-retry/">Spring Retry</a>
+            </span>
+            
+            <span>
+                <a href="/tags/testing/">Testing</a>
+            </span>
+            
+            <span>
+                <a href="/tags/web/">Web</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#apache-commons">Apache Commons</a></li>
+        <li><a href="#google-guava">Google Guava</a></li>
+        <li><a href="#jackson">Jackson</a></li>
+        <li><a href="#jaxb">JAXB</a></li>
+        <li><a href="#slf4j">SLF4J</a></li>
+        <li><a href="#log4j-2">Log4j 2</a></li>
+        <li><a href="#mockito">Mockito</a></li>
+        <li><a href="#assertj">AssertJ</a></li>
+        <li><a href="#hibernate">Hibernate</a></li>
+        <li><a href="#apache-httpcomponents">Apache HTTPComponents</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-weixin">
+      微信扫码关注公众号
+      <br/>
+      <img class="lazyload" src="/images/weixin/qrcode.jpg" />
+      <br/>
+      <h3> 【码农熊猫】 </h3>
+    </div>
+    
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">首页</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">归档</a>
+            </li>
+            
+            <li>
+                <a href="/about/">关于</a>
+            </li>
+            
+            <li>
+                <a href="/search/">搜索</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/eyougo" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/caching/">Caching</a>
+            </span>
+            
+            <span>
+                <a href="/tags/http-client-side/">HTTP Client-Side</a>
+            </span>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/performance/">Performance</a>
+            </span>
+            
+            <span>
+                <a href="/tags/redis/">Redis</a>
+            </span>
+            
+            <span>
+                <a href="/tags/security/">Security</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring/">Spring</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-boot/">Spring Boot</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-data/">Spring Data</a>
+            </span>
+            
+            <span>
+                <a href="/tags/spring-retry/">Spring Retry</a>
+            </span>
+            
+            <span>
+                <a href="/tags/testing/">Testing</a>
+            </span>
+            
+            <span>
+                <a href="/tags/web/">Web</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#apache-commons">Apache Commons</a></li>
+        <li><a href="#google-guava">Google Guava</a></li>
+        <li><a href="#jackson">Jackson</a></li>
+        <li><a href="#jaxb">JAXB</a></li>
+        <li><a href="#slf4j">SLF4J</a></li>
+        <li><a href="#log4j-2">Log4j 2</a></li>
+        <li><a href="#mockito">Mockito</a></li>
+        <li><a href="#assertj">AssertJ</a></li>
+        <li><a href="#hibernate">Hibernate</a></li>
+        <li><a href="#apache-httpcomponents">Apache HTTPComponents</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2021
+                <a href="https://pinmost.com">码农熊猫</a>
+                 | <a href="https://github.com/eyougo/hugo">Source code</a> 
+                | 基于 <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 构建
+                 | <a href="https://beian.miit.gov.cn/" target="_blank">京ICP备20026318号-1</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>
