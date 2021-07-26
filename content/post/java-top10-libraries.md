@@ -5,16 +5,16 @@ tags:
  - Java
 ---
 
-Java之所以是业务应用程序开发中排名第一的编程语言，同时还是顶级编程语言之一，很重要的原因是Java拥有功能丰富且庞大的核心库。
+`Java`之所以是业务应用程序开发中排名第一的编程语言，同时还是顶级编程语言之一，很重要的一个原因是`Java`拥有功能丰富且庞大的核心库。
 
-虽然Java标准库功能已经很强大，但在专业软件开发中还是需要其他Java库。
+虽然`Java`标准库功能已经很强大，但在专业软件开发中还是需要其他`Java`库。
 
-经过20多年在行业和社区中的积极开发和应用，Java拥有了许多成熟而有用的库。
+经过20多年在行业和社区中的积极开发和应用，`Java`拥有了许多成熟而有用的库。
 
-在这里，列出了所有领域的Java应用程序中使用的前10个Java库。无论你是为业余项目还是企业级项目开发软件，都可能需要在下面列出的大多数库。
+在这里，列出了所有领域的`Java`应用程序中使用的前10个`Java`库。无论你是为业余项目还是企业级项目开发软件，都可能需要在下面列出的大多数库。
 <!--more-->
 
-### Apache Commons
+## Apache Commons
 
 `Apache Commons`就像是Java软件开发中的一把瑞士军刀，它扩展了许多Java核心库。
 
@@ -37,7 +37,7 @@ Java之所以是业务应用程序开发中排名第一的编程语言，同时�
 
 [commons.apache.org](commons.apache.org)
 
-### Google Guava
+## Google Guava
 
 `Google Guava`是另一个顶级的通用Java库。最初由Google开发，由著名软件工程师和作家 Joshua Bloch 设计。
 
@@ -60,7 +60,7 @@ Java之所以是业务应用程序开发中排名第一的编程语言，同时�
 
 <https://github.com/google/guava>
 
-### Jackson
+## Jackson
 
 在软件开发中，你必须处理各种格式的数据。要么必须以不同格式加载或保存数据，要么必须以各种格式传输数据。
 
@@ -86,7 +86,7 @@ Java之所以是业务应用程序开发中排名第一的编程语言，同时�
 
 <https://github.com/FasterXML/jackson>
 
-### JAXB
+## JAXB
 
 正如前一节所讨论的，`XML`是另一种流行的数据格式，它提供更严格的数据验证、存储和传输。
 
@@ -106,7 +106,7 @@ Java之所以是业务应用程序开发中排名第一的编程语言，同时�
 
 <https://javaee.github.io/jaxb-v2/>
 
-### SLF4J
+## SLF4J
 
 日志记录是生产级软件开发需要集成且必不可少的一个部分。详细的日志记录将帮助你了解软件的工作情况并找到错误的根本原因，尤其是在生产系统中。
 
@@ -127,7 +127,7 @@ Java之所以是业务应用程序开发中排名第一的编程语言，同时�
 
 <http://www.slf4j.org/>
 
-### Log4j 2
+## Log4j 2
 
 `Java`中有很多优秀的日志库：`java.util.logging`、`Log4j`、`Log4j 2`、`Logback`。
 
@@ -146,7 +146,7 @@ Java之所以是业务应用程序开发中排名第一的编程语言，同时�
 
 <https://logging.apache.org/log4j/2.x/>
 
-### Mockito
+## Mockito
 
 单元/集成测试是软件开发过程的一个组成部分。
 通常你想测试单个类，但它依赖于其他重量级类或外部功能（例如数据库操作、I/O 操作），在这种情况下编写单元/集成测试的一种方法是`Mocking`。
@@ -168,7 +168,7 @@ Java之所以是业务应用程序开发中排名第一的编程语言，同时�
 
 <https://site.mockito.org/>
 
-### AssertJ
+## AssertJ
 
 `AssertJ`是列表中第二个与`TDD`相关的库。
 
@@ -191,7 +191,7 @@ Java之所以是业务应用程序开发中排名第一的编程语言，同时�
 
 <https://assertj.github.io/doc/>
 
-### Hibernate
+## Hibernate
 
 在我们作为软件工程师的日常生活中，我们必须与数据存储打交道。在现代，有多种类型的数据存储：`SQL`和无数的`NoSQL`数据存储。
 
@@ -216,7 +216,7 @@ Java之所以是业务应用程序开发中排名第一的编程语言，同时�
 
 <https://hibernate.org/>
 
-### Apache HTTPComponents
+## Apache HTTPComponents
 
 `HTTP`是迄今为止最常用和最流行的应用层协议。`Java`标准库没有提供太多处理`HTTP`的功能。
 
